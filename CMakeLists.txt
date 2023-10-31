@@ -57,7 +57,10 @@ include(cmake/CompilerWarnings.cmake)
 #! Project main executable source compilation
 add_executable(${PROJECT_NAME} main.cpp
         "process_creation.h"
-		process_creation.cpp)
+		process_creation.cpp
+		Process.h
+		IPCCreateProcess.h
+		IPCCreateProcess.cpp)
 
 #! Put path to your project headers
 target_include_directories(${PROJECT_NAME} PRIVATE options_parser)

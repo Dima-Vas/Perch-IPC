@@ -3,12 +3,12 @@
 #include <iostream>
 
 int main() {
-    ProcessCreation myProcess;
-
+    ProcessCreation myProcessCreation;
+    Process myProcess("your_command", {"arg1", "arg2"});
     // Example usage:
-    myProcess.spawn("your_command", {"arg1", "arg2"});
+    myProcessCreation.spawn();
     // Wait for the process to complete.
-    int exitCode = myProcess.wait_for_exit();
+    int exitCode = myProcessCreation.wait_for_exit();
 
     std::cout << "Child process exited with code: " << exitCode << std::endl;
 

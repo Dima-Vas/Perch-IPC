@@ -2,30 +2,31 @@
 // Created by Admin on 30.10.2023.
 //
 
-#ifndef MYRLS_PROCESS_CREATION_H_H
-#define MYRLS_PROCESS_CREATION_H_H
+#ifndef MYRLS_PROCESS_CREATION_H
+#define MYRLS_PROCESS_CREATION_H
 
 #include <string>
 #include <vector>
+#include "Process.h"
 
-#include <string>
-#include <vector>
 
 class ProcessCreation {
 public:
     ProcessCreation() = default;
 
     // Spawns a child process with the given command and arguments.
-    static static static int spawn(const std::string& command, const std::vector<std::string>& arguments);
+    int spawn(Process process);
 
     // Launches a child process with the given command and arguments and returns immediately.
-    static int launch(const std::string& command, const std::vector<std::string>& arguments);
+    int launch(Process process);
 
     // Waits for the child process to complete and returns its exit code.
-    static int wait_for_exit();
+    int wait_for_exit(Process process);
 
     // Kills the child process and returns its exit code.
-    int kill();
+    int kill(Process process);
+
+    int redirect_output(Process out_process, Process in_process);
 };
 
-#endif //MYRLS_PROCESS_CREATION_H_H
+#endif //MYRLS_PROCESS_CREATION_H
