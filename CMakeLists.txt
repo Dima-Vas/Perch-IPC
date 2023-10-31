@@ -60,7 +60,9 @@ add_executable(${PROJECT_NAME} main.cpp
 		process_creation.cpp
 		Process.h
 		IPC_process_creation.h
-		IPC_process_creation.cpp)
+		IPC_process_creation.cpp
+		Pipe.h
+		Shared_memory.h)
 
 #! Put path to your project headers
 target_include_directories(${PROJECT_NAME} PRIVATE options_parser)
