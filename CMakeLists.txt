@@ -59,8 +59,8 @@ add_executable(${PROJECT_NAME} main.cpp
         "process_creation.h"
 		process_creation.cpp
 		Process.h
-		IPCCreateProcess.h
-		IPCCreateProcess.cpp)
+		IPC_process_creation.h
+		IPC_process_creation.cpp)
 
 #! Put path to your project headers
 target_include_directories(${PROJECT_NAME} PRIVATE options_parser)

@@ -15,6 +15,10 @@ public:
             }
         }
     }
+    void addArgument(const std::string& arg) {
+        arguments.push_back(arg);
+    }
+
     const std::string& getPath() const {
         return executablePath;
     }
