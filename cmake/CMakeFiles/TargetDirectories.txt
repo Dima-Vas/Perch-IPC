@@ -1,0 +1,3 @@
+/home/dmytro/Downloads/lab3-mycat-vasylkiv_/cmake/CMakeFiles/mycat.dir
+/home/dmytro/Downloads/lab3-mycat-vasylkiv_/cmake/CMakeFiles/edit_cache.dir
+/home/dmytro/Downloads/lab3-mycat-vasylkiv_/cmake/CMakeFiles/rebuild_cache.dir
