@@ -39,9 +39,6 @@ public:
     Process get_output_Process() {
         return output_process;
     }
-    bool is_provider() {
-        return provider;
-    }
 
     /*
         Connects two Process objects via monodirectional named pipe.
@@ -85,14 +82,13 @@ private:
     Process input_process;
     sem_t * launch_sem;
     std::string launch_sem_name;
-    bool provider;
 
     int init_named_semaphore() {
         generate_unique_name();
         launch_sem = sem_open(launch_sem_name.c_str(), O_CREAT | O_EXCL , 0644, 0);
         if (launch_sem == SEM_FAILED) {
             perror("Bad semaphore");
-            throw std::runtime_error("Bad semaphore at provider");
+            throw std::runtime_error("Bad semaphore at Pipe");
         }
         return 0;
     }
@@ -107,16 +103,11 @@ private:
         oss << "/" << getpid() << "_";
         std::string random_string = oss.str();
 
-        for (std::size_t i = 0; i < chars.length(); ++i)
-        {
+        for (std::size_t i = 0; i < chars.length(); ++i) {
             random_string += chars[distribution(generator)];
         }
         
         launch_sem_name = random_string;
-    }
-
-    void set_provider(bool to_set) {
-        provider = to_set;
     }
 };
 

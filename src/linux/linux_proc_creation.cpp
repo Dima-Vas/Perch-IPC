@@ -12,7 +12,10 @@
 */
 void launchChild(Process& process) {
     std::string executablePath = process.getPath();
-    std::cout << "Executing " << process.getPID() << std::endl;
+    // std::cout << "Executing " << process.getPID() << std::endl;
+    // for (std::string str : process.getArguments()) {
+    //     std::cout << str << std::endl;
+    // }
 
     std::vector<std::string> arguments = process.getArguments();
     std::vector<char*> argv;
@@ -120,13 +123,13 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
         exit(EXIT_FAILURE);
     }
     else if (output_pid == 0) { // provider
-        std::cout << "Semaphore reached with provider" << std::endl;
-        // if (dup2(pipe_fd[1], STDOUT_FILENO) == -1) {
-        //     close(pipe_fd[0]);
-        //     close(pipe_fd[1]);
-        //     std::cerr << "Error from linuxPipeRedirectOutput : " << strerror(errno) << std::endl;
-        //     return nullptr;
-        // }
+        // std::cout << "Semaphore reached with provider" << std::endl;
+        if (dup2(pipe_fd[1], STDOUT_FILENO) == -1) {
+            close(pipe_fd[0]);
+            close(pipe_fd[1]);
+            std::cerr << "Error from linuxPipeRedirectOutput : " << strerror(errno) << std::endl;
+            return nullptr;
+        }
         sem_t * sem = sem_open(sem_name, 0);
         if (sem == SEM_FAILED) {
             perror("Bad semaphore");
@@ -135,7 +138,7 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
         close(pipe_fd[1]);
         fflush(stdout);
         sem_wait(sem);
-        std::cout << "Semaphore decremented with provider" << std::endl;
+        // std::cout << "Semaphore decremented with provider" << std::endl;
         out_process.setPID(getpid());
         launchChild(out_process);
         exit(EXIT_SUCCESS);
@@ -150,12 +153,19 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
         exit(EXIT_FAILURE);
     } 
     else if (input_pid == 0) { // consumer
-        // if (dup2(pipe_fd[0], STDIN_FILENO) == -1) {
-        //     close(pipe_fd[0]);
-        //     close(pipe_fd[1]);
+        if (dup2(pipe_fd[0], STDIN_FILENO) == -1) {
+            close(pipe_fd[0]);
+            close(pipe_fd[1]);
+            std::cerr << "Error from linuxPipeRedirectOutput : " << strerror(errno) << std::endl;
+            return nullptr;
+        }
+        close(pipe_fd[0]);  // Close the unused read end of the pipe
+
+        // if (dup2(pipe_fd[1], STDOUT_FILENO) == -1) {
         //     std::cerr << "Error from linuxPipeRedirectOutput : " << strerror(errno) << std::endl;
         //     return nullptr;
         // }
+        close(pipe_fd[1]);
         sem_t * sem = sem_open(sem_name, 0);
         if (sem == SEM_FAILED) {
             perror("Bad semaphore");
@@ -163,10 +173,10 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
             throw std::runtime_error("Bad semaphore at consumer");
         }
         close(pipe_fd[0]);
-        std::cout << "Semaphore reached with consumer" << std::endl;
+        // std::cout << "Semaphore reached with consumer" << std::endl;
         fflush(stdout);
         sem_wait(sem);
-        std::cout << "Semaphore decremented with consumer" << std::endl;
+        // std::cout << "Semaphore decremented with consumer" << std::endl;
         in_process.setPID(getpid());
         launchChild(in_process);
         exit(EXIT_SUCCESS);

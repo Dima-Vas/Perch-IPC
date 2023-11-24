@@ -5,11 +5,12 @@
 #include <iostream>
 
 int main(int argc, char* argv[]) {
-    Process proc1("echo");
-    Process proc2("wc");
+    Process proc1("ls");
+    Process proc2("echo");
     ProcessCreation pc;
-    proc1.addArgument("Hello world");
-    Pipe pipe = pc.pipe_redirect_output(proc1, proc2);
+    proc1.addArgument("../");
+    // proc1.addArgument("HEHEHEH");
+    Pipe pipe = pc.pipe_redirect_output(proc2, proc1);
     pipe.transfer(); // this simply increments the semaphore inside of Pipe and checks for errors
     return 0;
 }
