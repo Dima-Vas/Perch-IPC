@@ -8,8 +8,8 @@ int main(int argc, char* argv[]) {
     Process proc1("echo");
     Process proc2("wc");
     ProcessCreation pc;
+    proc1.addArgument("Hello world");
     Pipe pipe = pc.pipe_redirect_output(proc1, proc2);
-    pc.launch(proc1);
-    pc.launch(proc2);
+    pipe.transfer(); // this simply increments the semaphore inside of Pipe and checks for errors
     return 0;
 }
