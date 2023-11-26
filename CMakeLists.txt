@@ -55,13 +55,16 @@ include(cmake/CompilerWarnings.cmake)
 ##########################################################
 
 #! Project main executable source compilation
-add_executable(${PROJECT_NAME} main.cpp
-		process_creation.cpp
-		IPC_process_creation.cpp
-		src/linux/linux_proc_creation.cpp)
+set(SOURCE_FILES
+    src/linux/linux_proc_creation.cpp
+    src/api/IPC_process_creation.cpp
+	src/api/process_creation.cpp
+	main.cpp
+)
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 #! Put path to your project headers
-target_include_directories(${PROJECT_NAME} PRIVATE src/linux/ .)
+target_include_directories(${PROJECT_NAME} PRIVATE inc/linux/ inc/api .)
 #! Add external packages
 # options_parser requires boost::program_options library
 

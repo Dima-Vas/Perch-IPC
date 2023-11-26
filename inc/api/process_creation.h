@@ -17,7 +17,7 @@ public:
 
     int kill(Process& process);
 
-    Pipe pipe_redirect_output(Process& out_process, Process& in_process);
+    Pipe pipe_IPC(Process& out_process, Process& in_process);
 };
 
 #endif //MYRLS_PROCESS_CREATION_H

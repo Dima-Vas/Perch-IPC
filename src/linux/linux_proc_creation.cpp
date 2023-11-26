@@ -57,7 +57,7 @@ int linuxLaunch(Process& process) {
     } else { // Parent
         int status;
         process.setPID(pid);
-        std::cout << "in linuxLaunch : " << process.getPID() << std::endl;
+        // std::cout << "in linuxLaunch : " << process.getPID() << std::endl;
         return pid;
     }
 }
@@ -96,7 +96,7 @@ int linuxWaitForExit(Process& process) {
     POSIX-compatible function for redirecting the output from Process to Process by creating a named pipe. 
     Spawns processes represented by Process objects and puts them on pause until launched by Pipe::transfer.
     Returns a pointer to an array of pipe file descriptors in format {out_fd, in_fd} upon success, nullptr in case of an error.
-    Wrapped into ProcessCreation::pipe_redirect_output
+    Wrapped into ProcessCreation::pipe_IPC
     @param out_process Process
     @param in_process Process
 */

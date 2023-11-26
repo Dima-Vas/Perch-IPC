@@ -41,7 +41,7 @@ public:
     }
 
     /*
-        Connects two Process objects via monodirectional named pipe.
+        Connects two Process objects via monodirectional anonymous pipe.
     */
     int connect(Process& out_proc, Process& in_proc) {
         #ifdef __linux__

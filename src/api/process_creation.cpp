@@ -25,7 +25,7 @@ int ProcessCreation::kill(Process& process) {
     return 0;
 }
 
-Pipe ProcessCreation::pipe_redirect_output(Process& out_process, Process& in_process) {
+Pipe ProcessCreation::pipe_IPC(Process& out_process, Process& in_process) {
     Pipe to_return{};
     to_return.connect(out_process, in_process);
     return to_return;
