@@ -1,8 +1,8 @@
 #include "IPC_process_creation.h"
 
-SharedMemory IPC_process_creation :: shared_memoryIPC(std::string memoryName, size_t memorySize){
-    SharedMemory shm{};
-
+template <typename T>
+SharedMemory<T> IPC_process_creation :: shared_memoryIPC(std::string memoryName, size_t memorySize){
+    SharedMemory<T> shm{memoryName, memorySize, access};
     return shm;
 };
 

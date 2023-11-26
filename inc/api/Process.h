@@ -16,6 +16,7 @@ public:
             }
         }
     }
+    ~Process() {};
     void addArgument(const std::string& arg) {
         arguments.push_back(arg);
     }

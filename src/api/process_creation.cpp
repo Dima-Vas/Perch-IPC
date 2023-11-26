@@ -5,7 +5,7 @@
 int ProcessCreation::launch(Process& process) {
     int launchedPID = -1;
     #ifdef __linux__
-    launchedPID = linuxLaunch(process);
+        launchedPID = linuxLaunch(process);
     #endif
     return launchedPID;
 }
@@ -13,14 +13,14 @@ int ProcessCreation::launch(Process& process) {
 int ProcessCreation::wait_for_exit(Process& process) {
     int status = -1;
     #ifdef __linux__
-    status = linuxWaitForExit(process);
+        status = linuxWaitForExit(process);
     #endif
     return status;
 }
 
 int ProcessCreation::kill(Process& process) {
     #ifdef __linux__
-    return linuxKill(process);
+        return linuxKill(process);
     #endif
     return 0;
 }

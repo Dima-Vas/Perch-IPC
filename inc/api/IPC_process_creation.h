@@ -7,12 +7,13 @@
 
 class IPC_process_creation : public ProcessCreation {
 public:
-
-    SharedMemory shared_memoryIPC(std::string memoryName, size_t memorySize);
+    template <typename T>
+    SharedMemory<T> shared_memoryIPC(std::string memoryName, size_t memorySize);
 
 //    int mmapIPC(Process process1, Process process2);
 //
    int socketIPC(Process process1, Process process2);
+
 };
 
 #endif // IPC_CREATE_PROCESS_H
