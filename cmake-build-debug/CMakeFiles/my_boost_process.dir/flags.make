@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I"/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/linux" -I"/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/api" -I"/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/."
+CXX_INCLUDES = 
 
 CXX_FLAGS = -g -Wextra -std=gnu++20
 
