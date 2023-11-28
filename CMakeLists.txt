@@ -59,6 +59,7 @@ include(cmake/CompilerWarnings.cmake)
 set(LIBRARY_SOURCES
 		src/api/IPC_process_creation.cpp
 		src/api/process_creation.cpp
+		main.cpp
 )
 
 if(WIN32)
@@ -71,17 +72,13 @@ elseif(UNIX)
 	)
 endif()
 
-add_library(${LIB_NAME} SHARED ${LIBRARY_SOURCES})
+add_executable(${PROJECT_NAME} ${LIBRARY_SOURCES})
 
 if(WIN32)
-	target_include_directories(${LIB_NAME} PRIVATE inc/windows/ inc/api .)
+	target_include_directories(${PROJECT_NAME} PRIVATE inc/windows/ inc/api .)
 elseif(UNIX)
-	target_include_directories(${LIB_NAME} PRIVATE inc/linux/ inc/api .)
+	target_include_directories(${PROJECT_NAME} PRIVATE inc/linux/ inc/api .)
 endif()
-
-
-add_executable(${PROJECT_NAME} main.cpp)
-target_link_libraries(${PROJECT_NAME} PRIVATE ${LIB_NAME})
 
 #! Put path to your project headers
 #! Add external packages
