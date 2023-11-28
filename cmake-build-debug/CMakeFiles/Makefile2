@@ -63,6 +63,7 @@ CMAKE_BINARY_DIR = "/mnt/c/Users/Admin/OneDrive/Робочий стіл/Прог
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
+all: CMakeFiles/my_process.dir/all
 all: CMakeFiles/my_boost_process.dir/all
 .PHONY : all
 
@@ -71,17 +72,44 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
+clean: CMakeFiles/my_process.dir/clean
 clean: CMakeFiles/my_boost_process.dir/clean
 .PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/my_process.dir
+
+# All Build rule for target.
+CMakeFiles/my_process.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/CMakeFiles" --progress-num=3,4,5,6 "Built target my_process"
+.PHONY : CMakeFiles/my_process.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/my_process.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/CMakeFiles" 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/my_process.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/CMakeFiles" 0
+.PHONY : CMakeFiles/my_process.dir/rule
+
+# Convenience name for target.
+my_process: CMakeFiles/my_process.dir/rule
+.PHONY : my_process
+
+# clean rule for target.
+CMakeFiles/my_process.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/clean
+.PHONY : CMakeFiles/my_process.dir/clean
 
 #=============================================================================
 # Target rules for target CMakeFiles/my_boost_process.dir
 
 # All Build rule for target.
-CMakeFiles/my_boost_process.dir/all:
+CMakeFiles/my_boost_process.dir/all: CMakeFiles/my_process.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/CMakeFiles" --progress-num=1,2,3,4,5,6 "Built target my_boost_process"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/CMakeFiles" --progress-num=1,2 "Built target my_boost_process"
 .PHONY : CMakeFiles/my_boost_process.dir/all
 
 # Build rule for subdir invocation for target.

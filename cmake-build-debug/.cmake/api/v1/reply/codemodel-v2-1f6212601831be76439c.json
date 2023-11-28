@@ -7,7 +7,7 @@
 				{
 					"build" : ".",
 					"hasInstallRule" : true,
-					"jsonFile" : "directory-.-Debug-b60968966f60f41f3391.json",
+					"jsonFile" : "directory-.-Debug-b20cecf7d8d20afecfab.json",
 					"minimumCMakeVersion" : 
 					{
 						"string" : "3.15"
@@ -16,7 +16,8 @@
 					"source" : ".",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -31,7 +32,8 @@
 					"name" : "my_boost_process",
 					"targetIndexes" : 
 					[
-						0
+						0,
+						1
 					]
 				}
 			],
@@ -40,8 +42,15 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "my_boost_process::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-my_boost_process-Debug-93424128fe756b78ee87.json",
+					"jsonFile" : "target-my_boost_process-Debug-26308d9c0f72a439c7c7.json",
 					"name" : "my_boost_process",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "my_process::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-my_process-Debug-4945d973e83b2ff74fad.json",
+					"name" : "my_process",
 					"projectIndex" : 0
 				}
 			]

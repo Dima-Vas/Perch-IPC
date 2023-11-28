@@ -17,6 +17,56 @@
 					<DistClean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="my_process">
+				<Option output="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/libmy_process.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/linux"/>
+					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/api"/>
+					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/."/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 my_process"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="my_process/fast">
+				<Option output="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/libmy_process.so" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="3"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/linux"/>
+					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/api"/>
+					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/."/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 my_process/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="my_boost_process">
 				<Option output="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/my_boost_process" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug"/>
@@ -24,9 +74,6 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/linux"/>
-					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/api"/>
-					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/."/>
 					<Add directory="/usr/include/c++/11"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
 					<Add directory="/usr/include/c++/11/backward"/>
@@ -49,9 +96,6 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/linux"/>
-					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/api"/>
-					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/."/>
 					<Add directory="/usr/include/c++/11"/>
 					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
 					<Add directory="/usr/include/c++/11/backward"/>
@@ -132,16 +176,13 @@
 			<Option target="my_boost_process"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/src/api/IPC_process_creation.cpp">
-			<Option target="my_boost_process"/>
+			<Option target="my_process"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/src/api/process_creation.cpp">
-			<Option target="my_boost_process"/>
+			<Option target="my_process"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/src/linux/linux_proc_creation.cpp">
-			<Option target="my_boost_process"/>
-		</Unit>
-		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/src/windows/windows_proc_creation.cpp">
-			<Option target="my_boost_process"/>
+			<Option target="my_process"/>
 		</Unit>
 		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

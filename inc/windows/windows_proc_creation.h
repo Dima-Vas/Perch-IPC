@@ -1,5 +1,5 @@
-#ifndef WINDOWS_PROC_CREATION
-#define WINDOWS_PROC_CREATION
+#ifndef WIN32_PROC_CREATION
+#define WIN32_PROC_CREATION
 #include <signal.h>
 #include "Process.h"
 #include <semaphore.h>

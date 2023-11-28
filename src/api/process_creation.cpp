@@ -1,6 +1,10 @@
 #include "process_creation.h"
-#include "linux_proc_creation.h"
-#include "windows_proc_creation.h"
+#ifdef __linux__
+    #include "linux_proc_creation.h"
+#endif
+#ifdef _WIN32
+    #include "windows_proc_creation.h"
+#endif
 #include "Pipe.h"
 
 int ProcessCreation::launch(Process& process) {

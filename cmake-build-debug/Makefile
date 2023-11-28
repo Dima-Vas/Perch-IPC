@@ -162,6 +162,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named my_process
+
+# Build rule for target.
+my_process: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 my_process
+.PHONY : my_process
+
+# fast build rule for target.
+my_process/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/build
+.PHONY : my_process/fast
+
+#=============================================================================
 # Target rules for targets named my_boost_process
 
 # Build rule for target.
@@ -203,7 +216,7 @@ src/api/IPC_process_creation.o: src/api/IPC_process_creation.cpp.o
 
 # target to build an object file
 src/api/IPC_process_creation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/src/api/IPC_process_creation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/api/IPC_process_creation.cpp.o
 .PHONY : src/api/IPC_process_creation.cpp.o
 
 src/api/IPC_process_creation.i: src/api/IPC_process_creation.cpp.i
@@ -211,7 +224,7 @@ src/api/IPC_process_creation.i: src/api/IPC_process_creation.cpp.i
 
 # target to preprocess a source file
 src/api/IPC_process_creation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/src/api/IPC_process_creation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/api/IPC_process_creation.cpp.i
 .PHONY : src/api/IPC_process_creation.cpp.i
 
 src/api/IPC_process_creation.s: src/api/IPC_process_creation.cpp.s
@@ -219,7 +232,7 @@ src/api/IPC_process_creation.s: src/api/IPC_process_creation.cpp.s
 
 # target to generate assembly for a file
 src/api/IPC_process_creation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/src/api/IPC_process_creation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/api/IPC_process_creation.cpp.s
 .PHONY : src/api/IPC_process_creation.cpp.s
 
 src/api/process_creation.o: src/api/process_creation.cpp.o
@@ -227,7 +240,7 @@ src/api/process_creation.o: src/api/process_creation.cpp.o
 
 # target to build an object file
 src/api/process_creation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/src/api/process_creation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/api/process_creation.cpp.o
 .PHONY : src/api/process_creation.cpp.o
 
 src/api/process_creation.i: src/api/process_creation.cpp.i
@@ -235,7 +248,7 @@ src/api/process_creation.i: src/api/process_creation.cpp.i
 
 # target to preprocess a source file
 src/api/process_creation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/src/api/process_creation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/api/process_creation.cpp.i
 .PHONY : src/api/process_creation.cpp.i
 
 src/api/process_creation.s: src/api/process_creation.cpp.s
@@ -243,7 +256,7 @@ src/api/process_creation.s: src/api/process_creation.cpp.s
 
 # target to generate assembly for a file
 src/api/process_creation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/src/api/process_creation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/api/process_creation.cpp.s
 .PHONY : src/api/process_creation.cpp.s
 
 src/linux/linux_proc_creation.o: src/linux/linux_proc_creation.cpp.o
@@ -251,7 +264,7 @@ src/linux/linux_proc_creation.o: src/linux/linux_proc_creation.cpp.o
 
 # target to build an object file
 src/linux/linux_proc_creation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/src/linux/linux_proc_creation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/linux/linux_proc_creation.cpp.o
 .PHONY : src/linux/linux_proc_creation.cpp.o
 
 src/linux/linux_proc_creation.i: src/linux/linux_proc_creation.cpp.i
@@ -259,7 +272,7 @@ src/linux/linux_proc_creation.i: src/linux/linux_proc_creation.cpp.i
 
 # target to preprocess a source file
 src/linux/linux_proc_creation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/src/linux/linux_proc_creation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/linux/linux_proc_creation.cpp.i
 .PHONY : src/linux/linux_proc_creation.cpp.i
 
 src/linux/linux_proc_creation.s: src/linux/linux_proc_creation.cpp.s
@@ -267,32 +280,8 @@ src/linux/linux_proc_creation.s: src/linux/linux_proc_creation.cpp.s
 
 # target to generate assembly for a file
 src/linux/linux_proc_creation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/src/linux/linux_proc_creation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/linux/linux_proc_creation.cpp.s
 .PHONY : src/linux/linux_proc_creation.cpp.s
-
-src/windows/windows_proc_creation.o: src/windows/windows_proc_creation.cpp.o
-.PHONY : src/windows/windows_proc_creation.o
-
-# target to build an object file
-src/windows/windows_proc_creation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/src/windows/windows_proc_creation.cpp.o
-.PHONY : src/windows/windows_proc_creation.cpp.o
-
-src/windows/windows_proc_creation.i: src/windows/windows_proc_creation.cpp.i
-.PHONY : src/windows/windows_proc_creation.i
-
-# target to preprocess a source file
-src/windows/windows_proc_creation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/src/windows/windows_proc_creation.cpp.i
-.PHONY : src/windows/windows_proc_creation.cpp.i
-
-src/windows/windows_proc_creation.s: src/windows/windows_proc_creation.cpp.s
-.PHONY : src/windows/windows_proc_creation.s
-
-# target to generate assembly for a file
-src/windows/windows_proc_creation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/src/windows/windows_proc_creation.cpp.s
-.PHONY : src/windows/windows_proc_creation.cpp.s
 
 # Help Target
 help:
@@ -307,6 +296,7 @@ help:
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
 	@echo "... my_boost_process"
+	@echo "... my_process"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
@@ -319,9 +309,6 @@ help:
 	@echo "... src/linux/linux_proc_creation.o"
 	@echo "... src/linux/linux_proc_creation.i"
 	@echo "... src/linux/linux_proc_creation.s"
-	@echo "... src/windows/windows_proc_creation.o"
-	@echo "... src/windows/windows_proc_creation.i"
-	@echo "... src/windows/windows_proc_creation.s"
 .PHONY : help
 
 

@@ -5,6 +5,7 @@ cmake_minimum_required(VERSION 3.15)
 #! CHANGE YOUR PROJECT NAME
 #  It is used as your project's main executable name. 
 set(PROJECT_NAME my_boost_process)
+set(LIB_NAME my_process)
 project(${PROJECT_NAME} C CXX) # project(${PROJECT_NAME} C CXX ASM)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -55,17 +56,34 @@ include(cmake/CompilerWarnings.cmake)
 ##########################################################
 
 #! Project main executable source compilation
-set(SOURCE_FILES
-    src/linux/linux_proc_creation.cpp
-	src/windows/windows_proc_creation.cpp
-    src/api/IPC_process_creation.cpp
-	src/api/process_creation.cpp
-	main.cpp
+set(LIBRARY_SOURCES
+		src/api/IPC_process_creation.cpp
+		src/api/process_creation.cpp
 )
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+
+if(WIN32)
+	list(APPEND LIBRARY_SOURCES
+			src/windows/windows_proc_creation.cpp
+	)
+elseif(UNIX)
+	list(APPEND LIBRARY_SOURCES
+			src/linux/linux_proc_creation.cpp
+	)
+endif()
+
+add_library(${LIB_NAME} SHARED ${LIBRARY_SOURCES})
+
+if(WIN32)
+	target_include_directories(${LIB_NAME} PRIVATE inc/windows/ inc/api .)
+elseif(UNIX)
+	target_include_directories(${LIB_NAME} PRIVATE inc/linux/ inc/api .)
+endif()
+
+
+add_executable(${PROJECT_NAME} main.cpp)
+target_link_libraries(${PROJECT_NAME} PRIVATE ${LIB_NAME})
 
 #! Put path to your project headers
-target_include_directories(${PROJECT_NAME} PRIVATE inc/linux/ inc/api .)
 #! Add external packages
 # options_parser requires boost::program_options library
 

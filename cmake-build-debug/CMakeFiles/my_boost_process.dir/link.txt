@@ -1,1 +1,1 @@
-/usr/bin/c++ -g CMakeFiles/my_boost_process.dir/src/linux/linux_proc_creation.cpp.o CMakeFiles/my_boost_process.dir/src/windows/windows_proc_creation.cpp.o CMakeFiles/my_boost_process.dir/src/api/IPC_process_creation.cpp.o CMakeFiles/my_boost_process.dir/src/api/process_creation.cpp.o CMakeFiles/my_boost_process.dir/main.cpp.o -o my_boost_process 
+/usr/bin/c++ -g CMakeFiles/my_boost_process.dir/main.cpp.o -o my_boost_process  -Wl,-rpath,"/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug" libmy_process.so 

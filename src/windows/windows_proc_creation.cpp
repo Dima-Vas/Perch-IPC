@@ -1,6 +1,5 @@
 #include <iostream>
 #include <unistd.h>
-#include <sys/wait.h>
 #include <vector>
 #include <string.h>
 #include "Process.h"
