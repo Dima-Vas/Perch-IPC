@@ -7,7 +7,7 @@ if (WARNINGS_AS_ERRORS)
     set(MSVC_WARNINGS ${MSVC_WARNINGS} /WX)
     set(GCC_CLANG_WARNINGS ${GCC_CLANG_WARNINGS} -Wall -pedantic -Werror -Werror=vla)
 else ()
-    set(GCC_CLANG_WARNINGS ${GCC_CLANG_WARNINGS} -Werror=vla)
+    # set(GCC_CLANG_WARNINGS ${GCC_CLANG_WARNINGS} -Werror=vla) # for variable length arrays
 endif ()
 
 if (MSVC)

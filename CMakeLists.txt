@@ -40,7 +40,7 @@ set(ENABLE_ASAN OFF)
 set(ENABLE_TSan OFF)
 #! MemorySanitizer -- detects uninitialized memory reads
 #  Info: https://github.com/google/sanitizers/wiki/MemorySanitizer
-set(ENABLE_MSAN OFF)
+# set(ENABLE_MSAN ON)
 
 #! Be default -- build release version if not specified otherwise.
 if (NOT CMAKE_BUILD_TYPE)
@@ -55,23 +55,19 @@ include(cmake/CompilerWarnings.cmake)
 ##########################################################
 
 #! Project main executable source compilation
-add_executable(${PROJECT_NAME} main.cpp
-        "process_creation.h"
-		process_creation.cpp
-		Process.h
-		IPC_process_creation.h
-		IPC_process_creation.cpp
-		Pipe.h
-		Shared_memory.h)
+set(SOURCE_FILES
+    src/linux/linux_proc_creation.cpp
+	src/windows/windows_proc_creation.cpp
+    src/api/IPC_process_creation.cpp
+	src/api/process_creation.cpp
+	main.cpp
+)
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
 #! Put path to your project headers
-target_include_directories(${PROJECT_NAME} PRIVATE options_parser)
-
+target_include_directories(${PROJECT_NAME} PRIVATE inc/linux/ inc/api .)
 #! Add external packages
 # options_parser requires boost::program_options library
-find_package(Boost 1.71.0 COMPONENTS program_options system REQUIRED)
-target_include_directories(${PROJECT_NAME} PRIVATE ${Boost_INCLUDE_DIR})
-target_link_libraries(${PROJECT_NAME} Boost::program_options Boost::system)
 
 ##########################################################
 # Fixed CMakeLists.txt part
@@ -83,6 +79,7 @@ INSTALL(PROGRAMS
 
 # Define ALL_TARGETS variable to use in PVS and Sanitizers
 set(ALL_TARGETS ${PROJECT_NAME})
+set(CMAKE_BUILD_TYPE Debug)
 
 # Include CMake setup
 include(cmake/main-config.cmake)

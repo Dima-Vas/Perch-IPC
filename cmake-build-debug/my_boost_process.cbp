@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="my_boost_process"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="my_boost_process">
+				<Option output="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/my_boost_process" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/linux"/>
+					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/api"/>
+					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/."/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 my_boost_process"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="my_boost_process/fast">
+				<Option output="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/my_boost_process" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/linux"/>
+					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/api"/>
+					<Add directory="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/."/>
+					<Add directory="/usr/include/c++/11"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/11"/>
+					<Add directory="/usr/include/c++/11/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/11/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 my_boost_process/fast"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="list_install_components">
+				<Option working_dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 list_install_components"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install">
+				<Option working_dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 install"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/local">
+				<Option working_dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/local"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="install/strip">
+				<Option working_dir="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 install/strip"/>
+					<CompileFile command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/gmake -j8 -f &quot;/mnt/c/Users/Admin/OneDrive/Робочий\ стіл/Програмування/Збережені\ файли/ОС/Project/my_boost.process/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/main.cpp">
+			<Option target="my_boost_process"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/src/api/IPC_process_creation.cpp">
+			<Option target="my_boost_process"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/src/api/process_creation.cpp">
+			<Option target="my_boost_process"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/src/linux/linux_proc_creation.cpp">
+			<Option target="my_boost_process"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/src/windows/windows_proc_creation.cpp">
+			<Option target="my_boost_process"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake/CompilerWarnings.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake/Errors.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake/PVS-Studio-conf.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake/Sanitizers.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake/Windows.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+		<Unit filename="/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake/main-config.cmake">
+			<Option virtualFolder="CMake Files\cmake\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

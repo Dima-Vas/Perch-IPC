@@ -1,0 +1,7 @@
+/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/CMakeFiles/my_boost_process.dir
+/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/CMakeFiles/list_install_components.dir
+/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/CMakeFiles/install.dir
+/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/CMakeFiles/install/local.dir
+/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/CMakeFiles/install/strip.dir
