@@ -1,12 +1,15 @@
 #ifndef MY_BOOST_PROCESS_PIPE_H
 #define MY_BOOST_PROCESS_PIPE_H
 #include "Process.h"
+
 #ifdef __linux__
-#include "linux_proc_creation.h"
+    #include "linux_proc_creation.h"
 #endif
+
 #ifdef _WIN32
-#include "windows_proc_creation.h"
+    #include "windows_proc_creation.h"
 #endif
+
 #include <semaphore.h>
 #include <string.h>
 #include <iostream>
