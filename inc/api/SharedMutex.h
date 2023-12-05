@@ -39,6 +39,11 @@ public:
             shm_unlink(mutex_name.c_str());
         #endif
     }
+    SharedMutex() = default;
+
+    SharedMutex(SharedMutex&) = delete;
+
+    SharedMutex& operator=(SharedMutex&) = delete;
 
     void lock() {
         #ifdef __linux__
@@ -57,8 +62,7 @@ public:
     }
 
 private:
-    int shm_fd; 
-    int mutex_and_flag_shm_fd;
+    int shm_fd;
     std::string mutex_name;
     #ifdef __linux__
         std::atomic<bool>* shared_data;

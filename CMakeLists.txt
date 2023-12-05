@@ -1,84 +1,28 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.12)
+project(IPC)
 
-#! Check every comment after the "#!"
+# Set the C++ standard
+set(CMAKE_CXX_STANDARD 14)
+set(DEFAULT_BUILD_TYPE "Release")
+set(SO_VERSION 0.1)
+set(CMAKE_INSTALL_LIBDIR /usr/local/lib/ipc/)
+set(CMAKE_INSTALL_LIBDIR /usr/local/lib/ipc/inc)
 
-#! CHANGE YOUR PROJECT NAME
-#  It is used as your project's main executable name. 
-set(PROJECT_NAME my_boost_process)
-project(${PROJECT_NAME} C CXX) # project(${PROJECT_NAME} C CXX ASM)
-
-set(CMAKE_CXX_STANDARD 20)
-
-##########################################################
-# User configurable options of the template
-##########################################################
-# Note: symbols like WARNINGS_AS_ERRORS in configuration are intentionally variables
-# and not CMake options --using options creates too many problems for students.
-
-#! It is a good practice to set "WARNINGS_AS_ERRORS" ON,
-#  but sometimes it creates too much trouble, so default is OFF.
-set(WARNINGS_AS_ERRORS OFF)
-
-#! Always use PVS Studio while developing.
-set(ENABLE_PVS_STUDIO OFF)
-
-#! Select appropriate sanitizers.
-#  Definitely enable sanitizers while developing.
-#  Disable it for the production builds and before submitting for grading.
-#  Only one of the Memory (MSAN), Address (ASAN), or Thread (TSan)
-#  sanitizers is applicable at the time -- the first defined.
-
-#! UndefinedBehaviorSanitizer (UBSan).
-#  Info: https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
-set(ENABLE_UBSan OFF)
-#! AddressSanitizer -- detects use after free or after scope exit,
-#  memory overflows and leaks.
-#  Info: https://github.com/google/sanitizers/wiki/AddressSanitizer
-set(ENABLE_ASAN OFF)
-#! ThreadSanitizer -- detects data races.
-#  Info: https://clang.llvm.org/docs/ThreadSanitizer.html
-set(ENABLE_TSan OFF)
-#! MemorySanitizer -- detects uninitialized memory reads
-#  Info: https://github.com/google/sanitizers/wiki/MemorySanitizer
-# set(ENABLE_MSAN ON)
-
-#! Be default -- build release version if not specified otherwise.
-if (NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE Release)
-endif ()
-
-# Warnings as errors should be imported here -- do not move this line
-include(cmake/CompilerWarnings.cmake)
-
-##########################################################
-# Project files, packages, libraries and so on
-##########################################################
-
-#! Project main executable source compilation
-set(SOURCE_FILES
-    src/linux/linux_proc_creation.cpp
-    src/api/IPC_process_creation.cpp
-	src/api/process_creation.cpp
-	main.cpp
+add_library(IPC SHARED
+        src/linux/linux_proc_creation.cpp
+        src/api/IPC_process_creation.cpp
+        src/api/process_creation.cpp
+        IPC.h
 )
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-#! Put path to your project headers
-target_include_directories(${PROJECT_NAME} PRIVATE inc/linux/ inc/api .)
-#! Add external packages
-# options_parser requires boost::program_options library
+target_include_directories(IPC PUBLIC
+       ${CMAKE_CURRENT_SOURCE_DIR}/inc/linux
+)
 
-##########################################################
-# Fixed CMakeLists.txt part
-##########################################################
+set_target_properties(IPC PROPERTIES VERSION ${SO_VERSION})
+set_target_properties(IPC PROPERTIES PUBLIC_HEADER inc/*)
 
-INSTALL(PROGRAMS
-		$<TARGET_FILE:${PROJECT_NAME}> # ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}
-		DESTINATION bin)
-
-# Define ALL_TARGETS variable to use in PVS and Sanitizers
-set(ALL_TARGETS ${PROJECT_NAME})
-set(CMAKE_BUILD_TYPE Debug)
-
-# Include CMake setup
-include(cmake/main-config.cmake)
+include(GNUInstallDirs)
+install(TARGETS IPC
+        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})

@@ -2,7 +2,7 @@
 
 template <typename T>
 SharedMemory<T> IPC_process_creation :: shared_memoryIPC(std::string memoryName, size_t memorySize){
-    SharedMemory<T> shm{memoryName, memorySize, access};
+    SharedMemory<T> shm{memoryName, memorySize};
     return shm;
 };
 

@@ -1,5 +1,4 @@
 #include "process_creation.h"
-#include "linux_proc_creation.h"
 #include "Pipe.h"
 
 int ProcessCreation::launch(Process& process) {

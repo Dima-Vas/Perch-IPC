@@ -1,7 +1,7 @@
 #ifndef MY_BOOST_PROCESS_PIPE_H
 #define MY_BOOST_PROCESS_PIPE_H
 #include "Process.h"
-#include "linux_proc_creation.h"
+#include "../linux/linux_proc_creation.h"
 #include <semaphore.h>
 #include <string.h>
 #include <iostream>
@@ -14,7 +14,7 @@
 
 /*
     Provides the interface for the organization of IPC using named pipes.
-    Represents a created Pipe and stores information about it.  
+    Represents a created Pipe and stores information about it.
 */
 class Pipe {
 public:

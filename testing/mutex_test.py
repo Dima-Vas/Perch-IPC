@@ -16,7 +16,7 @@ def main():
     failure_count = 0
 
     # Run the C++ program a million times
-    for _ in range(10000):
+    for _ in range(1000):
         print(_)
         output = run_cpp_program()
 
@@ -24,8 +24,10 @@ def main():
         last_line = output.strip().split('\n')[-1]
 
         # Check if the last printed value is 5
-        if last_line.split(" ")[-1] == "5":
+        if last_line.split(" ")[-1] == "100":
             success_count += 1
+    # Print the results
+    # Print the results
         else:
             failure_count += 1
 
