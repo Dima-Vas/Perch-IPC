@@ -3,6 +3,7 @@
 #define MY_BOOST_PROCESS_SHARED_MEMORY_H
 #include "SharedMutex.h"
 #include <memory>
+#include <string.h>
 
 template <typename T>
 class SharedMemory {
@@ -116,6 +117,9 @@ public:
         return current_value;
     }
 
+    /*
+     * Make memory unable to be written anymore.
+     */
     void freeze() {
         frozen = true;
     };
