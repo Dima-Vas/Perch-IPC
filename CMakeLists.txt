@@ -1,28 +1,35 @@
-cmake_minimum_required(VERSION 3.12)
-project(IPC)
+cmake_minimum_required(VERSION 3.5)
+project(PIPC VERSION 0.1.0 LANGUAGES CXX)
 
-# Set the C++ standard
-set(CMAKE_CXX_STANDARD 14)
 set(DEFAULT_BUILD_TYPE "Release")
-set(SO_VERSION 0.1)
-set(CMAKE_INSTALL_LIBDIR /usr/local/lib/ipc/)
-set(CMAKE_INSTALL_LIBDIR /usr/local/lib/ipc/inc)
 
-add_library(IPC SHARED
-        src/linux/linux_proc_creation.cpp
-        src/api/IPC_process_creation.cpp
-        src/api/process_creation.cpp
-        IPC.h
-)
-
-target_include_directories(IPC PUBLIC
-       ${CMAKE_CURRENT_SOURCE_DIR}/inc/linux
-)
-
-set_target_properties(IPC PROPERTIES VERSION ${SO_VERSION})
-set_target_properties(IPC PROPERTIES PUBLIC_HEADER inc/*)
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    message(STATUS "Setting build type to '${DEFAULT_BUILD_TYPE}' as none was specified.")
+endif()
 
 include(GNUInstallDirs)
-install(TARGETS IPC
-        LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-        PUBLIC_HEADER DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+set(SOURCE_FILES
+        src/api/IPC_process_creation.cpp
+        src/linux/linux_proc_creation.cpp
+        src/api/process_creation.cpp)
+
+add_library(${PROJECT_NAME} ${SOURCE_FILES})
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc/api>
+        $<INSTALL_INTERFACE:inc/api>
+        PRIVATE inc/linux)
+
+set_target_properties(${PROJECT_NAME} PROPERTIES
+        VERSION ${PROJECT_VERSION}
+        SOVERSION 0.1)
+
+install(TARGETS ${PROJECT_NAME} EXPORT PIPCConfig
+        ARCHIVE  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        RUNTIME  DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(DIRECTORY inc/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+
+install(EXPORT PIPCConfig DESTINATION share/PIPC/cmake)
+
+export(TARGETS ${PROJECT_NAME} FILE PIPCConfig.cmake)
