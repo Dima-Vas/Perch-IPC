@@ -5,6 +5,8 @@
 #include <string.h>
 #include "Process.h"
 #include <semaphore.h>
+#include "linux_proc_creation.h"
+#include "ProcessCreation.h"
 
 /*
     An auxillary POSIX-compatible function for launching a process represented by Process object.
@@ -67,7 +69,7 @@ int linuxLaunch(Process& process) {
     Returns 0 upon success and -1 if fails.
     Wrapped into ProcessCreation::kill
 */
-int linuxKill(Process& process, bool killSig = SIGTERM) {
+int linuxKill(Process& process, int killSig) {
 
     pid_t pid = process.getPID();
 
@@ -88,7 +90,7 @@ int linuxKill(Process& process, bool killSig = SIGTERM) {
 */
 int linuxWaitForExit(Process& process) {
     int status = 0;
-    waitpid(process.getPID(), &status, 0); // TODO : test this
+    waitpid(process.getPID(), &status, 0);
     return status;
 }
 

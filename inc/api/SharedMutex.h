@@ -9,6 +9,7 @@
 #include <sys/mman.h>
 #include <exception>
 #include <atomic>
+#include <unistd.h>
 
 /*
     An IPC Mutex implementation for synchronization of processes in thread-like manner.

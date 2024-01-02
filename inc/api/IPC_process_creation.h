@@ -1,7 +1,7 @@
 #ifndef IPC_CREATE_PROCESS_H
 #define IPC_CREATE_PROCESS_H
 
-#include "process_creation.h"
+#include "ProcessCreation.h"
 #include "Pipe.h"
 #include "SharedMemory.h"
 

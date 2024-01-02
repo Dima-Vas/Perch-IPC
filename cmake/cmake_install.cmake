@@ -1,4 +1,3 @@
-# Install script for directory: /home/dmytro/Downloads/lab3-mycat-vasylkiv_
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

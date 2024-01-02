@@ -1,5 +1,5 @@
-#ifndef MYRLS_PROCESS_CREATION_H
-#define MYRLS_PROCESS_CREATION_H
+#ifndef PROCESS_CREATION_H
+#define PROCESS_CREATION_H
 
 #include <string>
 #include <vector>
@@ -15,9 +15,9 @@ public:
 
     int wait_for_exit(Process& process);
 
-    int kill(Process& process);
+    int kill(Process& process, int killsig);
 
     Pipe pipe_IPC(Process& out_process, Process& in_process);
 };
 
-#endif //MYRLS_PROCESS_CREATION_H
+#endif //PROCESS_CREATION_H

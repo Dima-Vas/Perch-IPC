@@ -60,7 +60,7 @@ public:
     }
 
     /*
-        Launches the Processes linked by this Pipe. The output of input_process is transfered to the output_process.
+        Launches the Processes linked by this Pipe. The output of Pipe::input_process is transfered to the Pipe::output_process.
     */
     int transfer() {
         if (sem_post(launch_sem) != 0) {

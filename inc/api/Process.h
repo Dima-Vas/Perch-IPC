@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 
+
 class Process {
 public:
     Process() {}
@@ -26,7 +27,7 @@ public:
     const std::vector<std::string>& getArguments() const {
         return arguments;
     }
-    void setPID(int pidToSet) { // TODO : remove in favor of Attribute Injection via constructor
+    void setPID(int pidToSet) {
         pid = pidToSet;
     }
     int getPID() {

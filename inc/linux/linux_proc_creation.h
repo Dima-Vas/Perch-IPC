@@ -5,7 +5,7 @@
 #include "../api/Process.h"
 #include <semaphore.h>
 int linuxLaunch(Process&);
-int linuxKill(Process&, bool killSig = SIGTERM);
+int linuxKill(Process&, int killSig);
 int linuxWaitForExit(Process&);
 int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const char* sem_name);
 #endif

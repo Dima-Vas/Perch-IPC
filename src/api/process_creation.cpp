@@ -1,4 +1,4 @@
-#include "process_creation.h"
+#include "ProcessCreation.h"
 #include "Pipe.h"
 
 int ProcessCreation::launch(Process& process) {
@@ -17,9 +17,9 @@ int ProcessCreation::wait_for_exit(Process& process) {
     return status;
 }
 
-int ProcessCreation::kill(Process& process) {
+int ProcessCreation::kill(Process& process, int killsig) {
     #ifdef __linux__
-        return linuxKill(process);
+        return linuxKill(process, killsig);
     #endif
     return 0;
 }
