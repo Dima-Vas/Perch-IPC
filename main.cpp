@@ -3,9 +3,7 @@
 #include <PIPC/api/ProcessCreation.h>
 #include <iostream>
 #include <string>
-#include <unistd.h>
 #include <cstring>
-
 
 int main() {
     // Shared memory size and name
@@ -27,7 +25,6 @@ int main() {
         while (i < 10) {
             auto result = shmem.compare_and_swap(0l, shmem.read(0) - 1l);
             std::cout << result << std::endl;
-            // usleep(100);
             ++i;
         }
         exit(EXIT_SUCCESS);
@@ -37,7 +34,6 @@ int main() {
         while (i < 10) {
             auto result = shmem.compare_and_swap(0l, shmem.read(0) + 1l);
             std::cout << result << std::endl;
-            // usleep(100);
             ++i;
         }
         Process child;

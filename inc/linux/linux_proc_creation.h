@@ -1,7 +1,6 @@
 
 #ifndef LINUX_PROC_CREATION
 #define LINUX_PROC_CREATION
-#include <signal.h>
 #include "../api/Process.h"
 #include <semaphore.h>
 int linuxLaunch(Process&);

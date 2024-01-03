@@ -9,8 +9,9 @@
 #include <sys/mman.h>
 #include <exception>
 #include <atomic>
-#include <unistd.h>
-
+#if defined(__linux__) || defined(__FreeBSD__)
+    #include <unistd.h>
+#endif
 /*
     An IPC Mutex implementation for synchronization of processes in thread-like manner.
     SharedMutex is intended to be used as synchro primitive in classes like SharedMemory, however can be utilized by users as it is.

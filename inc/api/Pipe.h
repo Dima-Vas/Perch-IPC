@@ -1,9 +1,8 @@
+
 #ifndef MY_BOOST_PROCESS_PIPE_H
 #define MY_BOOST_PROCESS_PIPE_H
-#include "Process.h"
-#include "../linux/linux_proc_creation.h"
-#include <semaphore.h>
-#include <string.h>
+
+#include <string>
 #include <iostream>
 #include <sstream>
 #include <fcntl.h>
@@ -11,6 +10,14 @@
 #include <iomanip>
 #include <random>
 
+
+#include "Process.h"
+#include <semaphore.h>
+
+#ifdef __linux__
+    #include "../linux/linux_proc_creation.h"
+    #include <unistd.h>
+#endif
 
 /*
     Provides the interface for the organization of IPC using named pipes.
@@ -45,16 +52,16 @@ public:
     */
     int connect(Process& out_proc, Process& in_proc) {
         #ifdef __linux__
-        original_stdin = dup(STDIN_FILENO);
-        original_stdout = dup(STDOUT_FILENO);
-        int* created_pipe = linuxPipeRedirectOutput(out_proc, in_proc, launch_sem_name.c_str());
-        if (created_pipe == nullptr) {
-            return -1;
-        }
-        output_fd = created_pipe[1];
-        input_fd = created_pipe[0];
-        output_process = out_proc;
-        input_process = in_proc;
+            original_stdin = dup(STDIN_FILENO);
+            original_stdout = dup(STDOUT_FILENO);
+            int* created_pipe = linuxPipeRedirectOutput(out_proc, in_proc, launch_sem_name.c_str());
+            if (created_pipe == nullptr) {
+                return -1;
+            }
+            output_fd = created_pipe[1];
+            input_fd = created_pipe[0];
+            output_process = out_proc;
+            input_process = in_proc;
         #endif
         return 0;
     }
@@ -85,11 +92,13 @@ private:
 
     int init_named_semaphore() {
         generate_unique_name();
-        launch_sem = sem_open(launch_sem_name.c_str(), O_CREAT | O_EXCL , 0644, 0);
-        if (launch_sem == SEM_FAILED) {
-            perror("Bad semaphore");
-            throw std::runtime_error("Bad semaphore at Pipe");
-        }
+        #if defined(__linux__) || defined(__FreeBSD__)
+            launch_sem = sem_open(launch_sem_name.c_str(), O_CREAT | O_EXCL , 0644, 0);
+            if (launch_sem == SEM_FAILED) {
+                perror("Bad semaphore");
+                throw std::runtime_error("Bad semaphore at Pipe");
+            }
+        #endif
         return 0;
     }
 
