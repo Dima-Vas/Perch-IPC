@@ -1,15 +1,12 @@
-#ifdef __linux__
-#include <sys/wait.h>
-#endif
-
-
+#include <iostream>
 #include <unistd.h>
-#include <semaphore.h>
-
+#include <sys/wait.h>
 #include <vector>
 #include <string.h>
-#include <iostream>
 #include "Process.h"
+#include <semaphore.h>
+#include "linux_proc_creation.h"
+#include "ProcessCreation.h"
 
 /*
     An auxillary POSIX-compatible function for launching a process represented by Process object.
@@ -33,9 +30,7 @@ void launchChild(Process& process) {
 
     char* const* argvArray = argv.data();
 
-#ifdef __linux__
     execvp(executablePath.c_str(), argvArray);
-#endif
 
     // Reached only if error occured
     std::cerr << "Error: Exec failed." << std::endl;
@@ -51,7 +46,6 @@ void launchChild(Process& process) {
 */
 int linuxLaunch(Process& process) {
 
-#ifdef __linux__
     pid_t pid = fork();
 
     if (pid < 0) {
@@ -68,8 +62,6 @@ int linuxLaunch(Process& process) {
         // std::cout << "in linuxLaunch : " << process.getPID() << std::endl;
         return pid;
     }
-#endif
-
 }
 
 /*
@@ -77,11 +69,10 @@ int linuxLaunch(Process& process) {
     Returns 0 upon success and -1 if fails.
     Wrapped into ProcessCreation::kill
 */
-int linuxKill(Process& process, bool killSig = SIGTERM) {
+int linuxKill(Process& process, int killSig) {
 
     pid_t pid = process.getPID();
 
-#ifdef __linux__
     std::cout << pid << std::endl;
     if (kill(pid, killSig) != 0) {
         std::cerr << ("Error from linuxKill : ") << strerror(errno) << std::endl;
@@ -89,8 +80,6 @@ int linuxKill(Process& process, bool killSig = SIGTERM) {
     }
     std::cout << "Killed : " << pid << std::endl;
     return 0;
-#endif
-
 }
 
 
@@ -101,12 +90,8 @@ int linuxKill(Process& process, bool killSig = SIGTERM) {
 */
 int linuxWaitForExit(Process& process) {
     int status = 0;
-
-#ifdef __linux__
-    waitpid(process.getPID(), &status, 0); // TODO : test this
+    waitpid(process.getPID(), &status, 0);
     return status;
-#endif
-
 }
 
 /*
@@ -118,9 +103,7 @@ int linuxWaitForExit(Process& process) {
     @param in_process Process
 */
 int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const char* sem_name) {
-    // TODO : Solve the bs with this one not redirecting
 
-#ifdef __linux__
     pid_t output_pid;
     pid_t input_pid;
     int stdin_fd = STDIN_FILENO;
@@ -141,7 +124,6 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
         exit(EXIT_FAILURE);
     }
     else if (output_pid == 0) { // provider
-        // std::cout << "Semaphore reached with provider" << std::endl;
         if (dup2(pipe_fd[1], STDOUT_FILENO) == -1) {
             close(pipe_fd[0]);
             close(pipe_fd[1]);
@@ -156,7 +138,6 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
         close(pipe_fd[1]);
         fflush(stdout);
         sem_wait(sem);
-        // std::cout << "Semaphore decremented with provider" << std::endl;
         out_process.setPID(getpid());
         launchChild(out_process);
         exit(EXIT_SUCCESS);
@@ -177,12 +158,8 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
             std::cerr << "Error from linuxPipeRedirectOutput : " << strerror(errno) << std::endl;
             return nullptr;
         }
-        close(pipe_fd[0]);  // Close the unused read end of the pipe
+        close(pipe_fd[0]);
 
-        // if (dup2(pipe_fd[1], STDOUT_FILENO) == -1) {
-        //     std::cerr << "Error from linuxPipeRedirectOutput : " << strerror(errno) << std::endl;
-        //     return nullptr;
-        // }
         close(pipe_fd[1]);
         sem_t * sem = sem_open(sem_name, 0);
         if (sem == SEM_FAILED) {
@@ -191,10 +168,8 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
             throw std::runtime_error("Bad semaphore at consumer");
         }
         close(pipe_fd[0]);
-        // std::cout << "Semaphore reached with consumer" << std::endl;
         fflush(stdout);
         sem_wait(sem);
-        // std::cout << "Semaphore decremented with consumer" << std::endl;
         in_process.setPID(getpid());
         launchChild(in_process);
         exit(EXIT_SUCCESS);
@@ -203,6 +178,4 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
     out_process.setPID(output_pid);
     in_process.setPID(input_pid);
     return pipe_fd;
-#endif
-
 }

@@ -1,63 +1,48 @@
 // Tests and lib using example
-
-#include "process_creation.h"
-#include "IPC_process_creation.h"
-#include "Pipe.h"
+#include <PIPC/api/SharedMemory.h>
+#include <PIPC/api/ProcessCreation.h>
 #include <iostream>
+#include <string>
+#include <unistd.h>
+#include <cstring>
 
-int main(int argc, char* argv[]) {
-    Process proc1("ls");
-    Process proc2("echo");
+
+int main() {
+    // Shared memory size and name
+    const size_t sharedMemorySize = 1;
+    const std::string sharedMemoryName = "/my_shared_memory";
     ProcessCreation pc;
-    Pipe pipe = pc.pipe_IPC(proc2, proc1);
-    Process proc3("pwd");
-    pipe.transfer(); // this simply increments the semaphore inside of Pipe and checks for errors
-    pc.wait_for_exit(proc1);
-    pc.wait_for_exit(proc2);
-    pc.launch(proc3);
+
+    // Create shared memory
+    SharedMemory<long> shmem(sharedMemoryName, sharedMemorySize);
+    shmem.write(0l, 0);
+
+    int pid = fork();
+
+    if (pid < 0) {
+        std::cerr << "Bad fork : " << strerror(errno) << std::endl;
+    } else if (pid == 0) {
+        // Child process
+        int i = 0;
+        while (i < 10) {
+            auto result = shmem.compare_and_swap(0l, shmem.read(0) - 1l);
+            std::cout << result << std::endl;
+            // usleep(100);
+            ++i;
+        }
+        exit(EXIT_SUCCESS);
+    } else {
+        // Parent process
+        int i = 0;
+        while (i < 10) {
+            auto result = shmem.compare_and_swap(0l, shmem.read(0) + 1l);
+            std::cout << result << std::endl;
+            // usleep(100);
+            ++i;
+        }
+        Process child;
+        child.setPID(pid);
+        pc.wait_for_exit(child);
+    }
     return 0;
 }
-
-//int main() {
-//    SharedMutex sh_mut("shared_mutex");
-//    int shm_fd = shm_open("int", O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
-//    ftruncate(shm_fd, sizeof(int));
-//    int* counter = (int*)mmap(nullptr, sizeof(int), PROT_READ | PROT_WRITE, MAP_SHARED, shm_fd, 0);
-//
-//    pid_t pid = fork();
-//
-//    if (pid == -1) {
-//        std::cerr << "Error in fork()" << std::endl;
-//        return 1;
-//    }
-//
-//    if (pid == 0) {
-//        while (*counter < 5) {
-//            sh_mut.lock();
-//            if (*counter >= 5) {
-//                break;
-//            }
-//            std::cout << "Child (Reader) Process: Before Increment Counter = " << *counter << std::endl;
-//            *counter = *counter + 1;
-//            std::cout << "Child (Reader) Process: After Increment Counter = " << *counter << std::endl;
-//            sh_mut.unlock();
-//        }
-//        exit(0);
-//    } else {
-//        while (*counter < 5) {
-//            sh_mut.lock();
-//            if (*counter >= 5) {
-//                break;
-//            }
-//            std::cout << "Parent (Writer) Process: Before Increment Counter = " << *counter << std::endl;
-//            *counter = *counter + 1;
-//            std::cout << "Parent (Writer) Process: After Increment Counter = " << *counter << std::endl;
-//            sh_mut.unlock();
-//        }
-//        waitpid(pid, NULL, 0);
-//    }
-//
-//    ftruncate(shm_fd, 0);
-//    shm_unlink("int");
-//    return 0;
-//}

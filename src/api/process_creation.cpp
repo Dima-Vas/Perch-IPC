@@ -1,19 +1,10 @@
-#include "process_creation.h"
-#ifdef __linux__
-    #include "linux_proc_creation.h"
-#endif
-#ifdef _WIN32
-    #include "windows_proc_creation.h"
-#endif
+#include "ProcessCreation.h"
 #include "Pipe.h"
 
 int ProcessCreation::launch(Process& process) {
     int launchedPID = -1;
     #ifdef __linux__
         launchedPID = linuxLaunch(process);
-    #endif
-    #ifdef _WIN32
-        launchedPID = windowsLaunch(process);
     #endif
     return launchedPID;
 }
@@ -23,18 +14,12 @@ int ProcessCreation::wait_for_exit(Process& process) {
     #ifdef __linux__
         status = linuxWaitForExit(process);
     #endif
-    #ifdef _WIN32
-        status = windowsWaitForExit(process);
-    #endif
     return status;
 }
 
-int ProcessCreation::kill(Process& process) {
+int ProcessCreation::kill(Process& process, int killsig) {
     #ifdef __linux__
-        return linuxKill(process);
-    #endif
-    #ifdef _WIN32
-        return windowsKill(process);
+        return linuxKill(process, killsig);
     #endif
     return 0;
 }

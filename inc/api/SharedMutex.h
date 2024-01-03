@@ -1,25 +1,15 @@
 
 #ifndef SHARED_MUTEX_H
 #define SHARED_MUTEX_H
-
-
-#if _WIN32
-#endif
-
-#ifdef __linux__
-
-#include <sys/mman.h>
-#include <sys/mman.h>
-
-#endif
-
-
 #include <mutex>
+#include <sys/mman.h>
 #include <iostream>
 #include <string>
 #include <fcntl.h>
+#include <sys/mman.h>
 #include <exception>
 #include <atomic>
+#include <unistd.h>
 
 /*
     An IPC Mutex implementation for synchronization of processes in thread-like manner.
@@ -50,6 +40,11 @@ public:
             shm_unlink(mutex_name.c_str());
         #endif
     }
+    SharedMutex() = default;
+
+    SharedMutex(SharedMutex&) = delete;
+
+    SharedMutex& operator=(SharedMutex&) = delete;
 
     void lock() {
         #ifdef __linux__
@@ -68,8 +63,7 @@ public:
     }
 
 private:
-    int shm_fd; 
-    int mutex_and_flag_shm_fd;
+    int shm_fd;
     std::string mutex_name;
     #ifdef __linux__
         std::atomic<bool>* shared_data;

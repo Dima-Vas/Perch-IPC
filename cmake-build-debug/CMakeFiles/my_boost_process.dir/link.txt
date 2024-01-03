@@ -1,1 +1,0 @@
-/usr/bin/c++ -g CMakeFiles/my_boost_process.dir/main.cpp.o -o my_boost_process  -Wl,-rpath,"/mnt/c/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug" libmy_process.so 

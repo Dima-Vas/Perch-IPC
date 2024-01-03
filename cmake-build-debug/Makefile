@@ -162,61 +162,37 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named my_process
+# Target rules for targets named PIPC
 
 # Build rule for target.
-my_process: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 my_process
-.PHONY : my_process
+PIPC: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 PIPC
+.PHONY : PIPC
 
 # fast build rule for target.
-my_process/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/build
-.PHONY : my_process/fast
+PIPC/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PIPC.dir/build.make CMakeFiles/PIPC.dir/build
+.PHONY : PIPC/fast
 
 #=============================================================================
-# Target rules for targets named my_boost_process
+# Target rules for targets named uninstall
 
 # Build rule for target.
-my_boost_process: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 my_boost_process
-.PHONY : my_boost_process
+uninstall: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 uninstall
+.PHONY : uninstall
 
 # fast build rule for target.
-my_boost_process/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/build
-.PHONY : my_boost_process/fast
-
-main.o: main.cpp.o
-.PHONY : main.o
-
-# target to build an object file
-main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/main.cpp.o
-.PHONY : main.cpp.o
-
-main.i: main.cpp.i
-.PHONY : main.i
-
-# target to preprocess a source file
-main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/main.cpp.i
-.PHONY : main.cpp.i
-
-main.s: main.cpp.s
-.PHONY : main.s
-
-# target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_boost_process.dir/build.make CMakeFiles/my_boost_process.dir/main.cpp.s
-.PHONY : main.cpp.s
+uninstall/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/uninstall.dir/build.make CMakeFiles/uninstall.dir/build
+.PHONY : uninstall/fast
 
 src/api/IPC_process_creation.o: src/api/IPC_process_creation.cpp.o
 .PHONY : src/api/IPC_process_creation.o
 
 # target to build an object file
 src/api/IPC_process_creation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/api/IPC_process_creation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PIPC.dir/build.make CMakeFiles/PIPC.dir/src/api/IPC_process_creation.cpp.o
 .PHONY : src/api/IPC_process_creation.cpp.o
 
 src/api/IPC_process_creation.i: src/api/IPC_process_creation.cpp.i
@@ -224,7 +200,7 @@ src/api/IPC_process_creation.i: src/api/IPC_process_creation.cpp.i
 
 # target to preprocess a source file
 src/api/IPC_process_creation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/api/IPC_process_creation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PIPC.dir/build.make CMakeFiles/PIPC.dir/src/api/IPC_process_creation.cpp.i
 .PHONY : src/api/IPC_process_creation.cpp.i
 
 src/api/IPC_process_creation.s: src/api/IPC_process_creation.cpp.s
@@ -232,7 +208,7 @@ src/api/IPC_process_creation.s: src/api/IPC_process_creation.cpp.s
 
 # target to generate assembly for a file
 src/api/IPC_process_creation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/api/IPC_process_creation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PIPC.dir/build.make CMakeFiles/PIPC.dir/src/api/IPC_process_creation.cpp.s
 .PHONY : src/api/IPC_process_creation.cpp.s
 
 src/api/process_creation.o: src/api/process_creation.cpp.o
@@ -240,7 +216,7 @@ src/api/process_creation.o: src/api/process_creation.cpp.o
 
 # target to build an object file
 src/api/process_creation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/api/process_creation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PIPC.dir/build.make CMakeFiles/PIPC.dir/src/api/process_creation.cpp.o
 .PHONY : src/api/process_creation.cpp.o
 
 src/api/process_creation.i: src/api/process_creation.cpp.i
@@ -248,7 +224,7 @@ src/api/process_creation.i: src/api/process_creation.cpp.i
 
 # target to preprocess a source file
 src/api/process_creation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/api/process_creation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PIPC.dir/build.make CMakeFiles/PIPC.dir/src/api/process_creation.cpp.i
 .PHONY : src/api/process_creation.cpp.i
 
 src/api/process_creation.s: src/api/process_creation.cpp.s
@@ -256,7 +232,7 @@ src/api/process_creation.s: src/api/process_creation.cpp.s
 
 # target to generate assembly for a file
 src/api/process_creation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/api/process_creation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PIPC.dir/build.make CMakeFiles/PIPC.dir/src/api/process_creation.cpp.s
 .PHONY : src/api/process_creation.cpp.s
 
 src/linux/linux_proc_creation.o: src/linux/linux_proc_creation.cpp.o
@@ -264,7 +240,7 @@ src/linux/linux_proc_creation.o: src/linux/linux_proc_creation.cpp.o
 
 # target to build an object file
 src/linux/linux_proc_creation.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/linux/linux_proc_creation.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PIPC.dir/build.make CMakeFiles/PIPC.dir/src/linux/linux_proc_creation.cpp.o
 .PHONY : src/linux/linux_proc_creation.cpp.o
 
 src/linux/linux_proc_creation.i: src/linux/linux_proc_creation.cpp.i
@@ -272,7 +248,7 @@ src/linux/linux_proc_creation.i: src/linux/linux_proc_creation.cpp.i
 
 # target to preprocess a source file
 src/linux/linux_proc_creation.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/linux/linux_proc_creation.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PIPC.dir/build.make CMakeFiles/PIPC.dir/src/linux/linux_proc_creation.cpp.i
 .PHONY : src/linux/linux_proc_creation.cpp.i
 
 src/linux/linux_proc_creation.s: src/linux/linux_proc_creation.cpp.s
@@ -280,7 +256,7 @@ src/linux/linux_proc_creation.s: src/linux/linux_proc_creation.cpp.s
 
 # target to generate assembly for a file
 src/linux/linux_proc_creation.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/my_process.dir/build.make CMakeFiles/my_process.dir/src/linux/linux_proc_creation.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/PIPC.dir/build.make CMakeFiles/PIPC.dir/src/linux/linux_proc_creation.cpp.s
 .PHONY : src/linux/linux_proc_creation.cpp.s
 
 # Help Target
@@ -295,11 +271,8 @@ help:
 	@echo "... install/strip"
 	@echo "... list_install_components"
 	@echo "... rebuild_cache"
-	@echo "... my_boost_process"
-	@echo "... my_process"
-	@echo "... main.o"
-	@echo "... main.i"
-	@echo "... main.s"
+	@echo "... uninstall"
+	@echo "... PIPC"
 	@echo "... src/api/IPC_process_creation.o"
 	@echo "... src/api/IPC_process_creation.i"
 	@echo "... src/api/IPC_process_creation.s"

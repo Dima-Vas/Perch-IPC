@@ -1,100 +1,58 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.5)
+project(PIPC VERSION 0.1.0 LANGUAGES CXX)
 
-#! Check every comment after the "#!"
+set(DEFAULT_BUILD_TYPE "Release")
 
-#! CHANGE YOUR PROJECT NAME
-#  It is used as your project's main executable name. 
-set(PROJECT_NAME my_boost_process)
-set(LIB_NAME my_process)
-project(${PROJECT_NAME} C CXX) # project(${PROJECT_NAME} C CXX ASM)
-
-set(CMAKE_CXX_STANDARD 20)
-
-##########################################################
-# User configurable options of the template
-##########################################################
-# Note: symbols like WARNINGS_AS_ERRORS in configuration are intentionally variables
-# and not CMake options --using options creates too many problems for students.
-
-#! It is a good practice to set "WARNINGS_AS_ERRORS" ON,
-#  but sometimes it creates too much trouble, so default is OFF.
-set(WARNINGS_AS_ERRORS OFF)
-
-#! Always use PVS Studio while developing.
-set(ENABLE_PVS_STUDIO OFF)
-
-#! Select appropriate sanitizers.
-#  Definitely enable sanitizers while developing.
-#  Disable it for the production builds and before submitting for grading.
-#  Only one of the Memory (MSAN), Address (ASAN), or Thread (TSan)
-#  sanitizers is applicable at the time -- the first defined.
-
-#! UndefinedBehaviorSanitizer (UBSan).
-#  Info: https://clang.llvm.org/docs/UndefinedBehaviorSanitizer.html
-set(ENABLE_UBSan OFF)
-#! AddressSanitizer -- detects use after free or after scope exit,
-#  memory overflows and leaks.
-#  Info: https://github.com/google/sanitizers/wiki/AddressSanitizer
-set(ENABLE_ASAN OFF)
-#! ThreadSanitizer -- detects data races.
-#  Info: https://clang.llvm.org/docs/ThreadSanitizer.html
-set(ENABLE_TSan OFF)
-#! MemorySanitizer -- detects uninitialized memory reads
-#  Info: https://github.com/google/sanitizers/wiki/MemorySanitizer
-# set(ENABLE_MSAN ON)
-
-#! Be default -- build release version if not specified otherwise.
-if (NOT CMAKE_BUILD_TYPE)
-	set(CMAKE_BUILD_TYPE Release)
-endif ()
-
-# Warnings as errors should be imported here -- do not move this line
-include(cmake/CompilerWarnings.cmake)
-
-##########################################################
-# Project files, packages, libraries and so on
-##########################################################
-
-#! Project main executable source compilation
-set(LIBRARY_SOURCES
-		src/api/IPC_process_creation.cpp
-		src/api/process_creation.cpp
-		main.cpp
-)
-
-if(WIN32)
-	list(APPEND LIBRARY_SOURCES
-			src/windows/windows_proc_creation.cpp
-	)
-elseif(UNIX)
-	list(APPEND LIBRARY_SOURCES
-			src/linux/linux_proc_creation.cpp
-	)
+if(NOT CMAKE_BUILD_TYPE AND NOT CMAKE_CONFIGURATION_TYPES)
+    message(STATUS "Setting build type to '${DEFAULT_BUILD_TYPE}' as none was specified.")
 endif()
 
-add_executable(${PROJECT_NAME} ${LIBRARY_SOURCES})
-
+include(GNUInstallDirs)
 if(WIN32)
-	target_include_directories(${PROJECT_NAME} PRIVATE inc/windows/ inc/api .)
+    set(SOURCE_FILES
+            src/api/IPC_process_creation.cpp
+            src/windows/windows_proc_creation.cpp
+            src/api/process_creation.cpp)
 elseif(UNIX)
-	target_include_directories(${PROJECT_NAME} PRIVATE inc/linux/ inc/api .)
+    set(SOURCE_FILES
+            src/api/IPC_process_creation.cpp
+            src/linux/linux_proc_creation.cpp
+            src/api/process_creation.cpp)
 endif()
 
-#! Put path to your project headers
-#! Add external packages
-# options_parser requires boost::program_options library
+add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
 
-##########################################################
-# Fixed CMakeLists.txt part
-##########################################################
+if(WIN32)
+    target_include_directories(${PROJECT_NAME} PUBLIC
+            $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc/api>
+            $<INSTALL_INTERFACE:inc/api>
+            PRIVATE inc/windows)
+elseif(UNIX)
+    target_include_directories(${PROJECT_NAME} PUBLIC
+            $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/inc/api>
+            $<INSTALL_INTERFACE:inc/api>
+            PRIVATE inc/linux)
+endif()
 
-INSTALL(PROGRAMS
-		$<TARGET_FILE:${PROJECT_NAME}> # ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}
-		DESTINATION bin)
 
-# Define ALL_TARGETS variable to use in PVS and Sanitizers
-set(ALL_TARGETS ${PROJECT_NAME})
-set(CMAKE_BUILD_TYPE Debug)
+set_target_properties(${PROJECT_NAME} PROPERTIES
+        VERSION ${PROJECT_VERSION}
+        SOVERSION 0.1)
 
-# Include CMake setup
-include(cmake/main-config.cmake)
+install(TARGETS ${PROJECT_NAME} EXPORT ${PROJECT_NAME}Config
+        LIBRARY  DESTINATION ${CMAKE_INSTALL_LIBDIR}
+        PUBLIC_HEADER  DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+
+install(DIRECTORY inc/ DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${PROJECT_NAME})
+
+install(EXPORT ${PROJECT_NAME}Config DESTINATION share/${PROJECT_NAME}/cmake)
+
+export(TARGETS ${PROJECT_NAME} FILE ${PROJECT_NAME}Config.cmake)
+
+configure_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake_uninstall.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+    IMMEDIATE @ONLY)
+
+add_custom_target(uninstall
+    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)

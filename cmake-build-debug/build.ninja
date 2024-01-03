@@ -11,7 +11,7 @@
 # =============================================================================
 
 # =============================================================================
-# Project: my_boost_process
+# Project: PIPC
 # Configurations: Debug
 # =============================================================================
 
@@ -41,59 +41,62 @@ include CMakeFiles/rules.ninja
 
 cmake_ninja_workdir = C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake-build-debug/
 # =============================================================================
-# Object build statements for EXECUTABLE target my_boost_process
+# Object build statements for SHARED_LIBRARY target PIPC
 
 
 #############################################
-# Order-only phony target for my_boost_process
+# Order-only phony target for PIPC
 
-build cmake_object_order_depends_target_my_boost_process: phony || CMakeFiles/my_boost_process.dir
+build cmake_object_order_depends_target_PIPC: phony || CMakeFiles/PIPC.dir
 
-build CMakeFiles/my_boost_process.dir/src/api/IPC_process_creation.cpp.obj: CXX_COMPILER__my_boost_process_unscanned_Debug C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/src/api/IPC_process_creation.cpp || cmake_object_order_depends_target_my_boost_process
-  DEP_FILE = CMakeFiles\my_boost_process.dir\src\api\IPC_process_creation.cpp.obj.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always -Wextra
-  INCLUDES = -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/windows" -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/api" -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/."
-  OBJECT_DIR = CMakeFiles\my_boost_process.dir
-  OBJECT_FILE_DIR = CMakeFiles\my_boost_process.dir\src\api
+build CMakeFiles/PIPC.dir/src/api/IPC_process_creation.cpp.obj: CXX_COMPILER__PIPC_unscanned_Debug C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/src/api/IPC_process_creation.cpp || cmake_object_order_depends_target_PIPC
+  DEFINES = -DPIPC_EXPORTS
+  DEP_FILE = CMakeFiles\PIPC.dir\src\api\IPC_process_creation.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/api" -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/windows"
+  OBJECT_DIR = CMakeFiles\PIPC.dir
+  OBJECT_FILE_DIR = CMakeFiles\PIPC.dir\src\api
 
-build CMakeFiles/my_boost_process.dir/src/api/process_creation.cpp.obj: CXX_COMPILER__my_boost_process_unscanned_Debug C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/src/api/process_creation.cpp || cmake_object_order_depends_target_my_boost_process
-  DEP_FILE = CMakeFiles\my_boost_process.dir\src\api\process_creation.cpp.obj.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always -Wextra
-  INCLUDES = -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/windows" -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/api" -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/."
-  OBJECT_DIR = CMakeFiles\my_boost_process.dir
-  OBJECT_FILE_DIR = CMakeFiles\my_boost_process.dir\src\api
+build CMakeFiles/PIPC.dir/src/windows/windows_proc_creation.cpp.obj: CXX_COMPILER__PIPC_unscanned_Debug C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/src/windows/windows_proc_creation.cpp || cmake_object_order_depends_target_PIPC
+  DEFINES = -DPIPC_EXPORTS
+  DEP_FILE = CMakeFiles\PIPC.dir\src\windows\windows_proc_creation.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/api" -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/windows"
+  OBJECT_DIR = CMakeFiles\PIPC.dir
+  OBJECT_FILE_DIR = CMakeFiles\PIPC.dir\src\windows
 
-build CMakeFiles/my_boost_process.dir/main.cpp.obj: CXX_COMPILER__my_boost_process_unscanned_Debug C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/main.cpp || cmake_object_order_depends_target_my_boost_process
-  DEP_FILE = CMakeFiles\my_boost_process.dir\main.cpp.obj.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always -Wextra
-  INCLUDES = -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/windows" -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/api" -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/."
-  OBJECT_DIR = CMakeFiles\my_boost_process.dir
-  OBJECT_FILE_DIR = CMakeFiles\my_boost_process.dir
-
-build CMakeFiles/my_boost_process.dir/src/windows/windows_proc_creation.cpp.obj: CXX_COMPILER__my_boost_process_unscanned_Debug C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/src/windows/windows_proc_creation.cpp || cmake_object_order_depends_target_my_boost_process
-  DEP_FILE = CMakeFiles\my_boost_process.dir\src\windows\windows_proc_creation.cpp.obj.d
-  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always -Wextra
-  INCLUDES = -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/windows" -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/api" -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/."
-  OBJECT_DIR = CMakeFiles\my_boost_process.dir
-  OBJECT_FILE_DIR = CMakeFiles\my_boost_process.dir\src\windows
+build CMakeFiles/PIPC.dir/src/api/process_creation.cpp.obj: CXX_COMPILER__PIPC_unscanned_Debug C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/src/api/process_creation.cpp || cmake_object_order_depends_target_PIPC
+  DEFINES = -DPIPC_EXPORTS
+  DEP_FILE = CMakeFiles\PIPC.dir\src\api\process_creation.cpp.obj.d
+  FLAGS = -g -fdiagnostics-color=always
+  INCLUDES = -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/api" -I"C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/inc/windows"
+  OBJECT_DIR = CMakeFiles\PIPC.dir
+  OBJECT_FILE_DIR = CMakeFiles\PIPC.dir\src\api
 
 
 # =============================================================================
-# Link build statements for EXECUTABLE target my_boost_process
+# Link build statements for SHARED_LIBRARY target PIPC
 
 
 #############################################
-# Link the executable my_boost_process.exe
+# Link the shared library libPIPC.dll
 
-build my_boost_process.exe: CXX_EXECUTABLE_LINKER__my_boost_process_Debug CMakeFiles/my_boost_process.dir/src/api/IPC_process_creation.cpp.obj CMakeFiles/my_boost_process.dir/src/api/process_creation.cpp.obj CMakeFiles/my_boost_process.dir/main.cpp.obj CMakeFiles/my_boost_process.dir/src/windows/windows_proc_creation.cpp.obj
-  FLAGS = -g
+build libPIPC.dll libPIPC.dll.a: CXX_SHARED_LIBRARY_LINKER__PIPC_Debug CMakeFiles/PIPC.dir/src/api/IPC_process_creation.cpp.obj CMakeFiles/PIPC.dir/src/windows/windows_proc_creation.cpp.obj CMakeFiles/PIPC.dir/src/api/process_creation.cpp.obj
+  LANGUAGE_COMPILE_FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
-  OBJECT_DIR = CMakeFiles\my_boost_process.dir
+  OBJECT_DIR = CMakeFiles\PIPC.dir
   POST_BUILD = cd .
   PRE_LINK = cd .
-  TARGET_FILE = my_boost_process.exe
-  TARGET_IMPLIB = libmy_boost_process.dll.a
-  TARGET_PDB = my_boost_process.exe.dbg
+  RESTAT = 1
+  TARGET_FILE = libPIPC.dll
+  TARGET_IMPLIB = libPIPC.dll.a
+  TARGET_PDB = PIPC.dll.dbg
+
+
+#############################################
+# Utility command for uninstall
+
+build uninstall: phony CMakeFiles/uninstall
 
 
 #############################################
@@ -160,10 +163,17 @@ build CMakeFiles/install/strip.util: CUSTOM_COMMAND all
 
 build install/strip: phony CMakeFiles/install/strip.util
 
+
+#############################################
+# Custom command for CMakeFiles\uninstall
+
+build CMakeFiles/uninstall | ${cmake_ninja_workdir}CMakeFiles/uninstall: CUSTOM_COMMAND
+  COMMAND = cmd.exe /C "cd /D "C:\Users\Admin\OneDrive\Робочий стіл\Програмування\Збережені файли\ОС\Project\my_boost.process\cmake-build-debug" && "C:\Program Files\JetBrains\CLion 2023.2.2\bin\cmake\win\x64\bin\cmake.exe" -P "C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug/cmake_uninstall.cmake""
+
 # =============================================================================
 # Target aliases.
 
-build my_boost_process: phony my_boost_process.exe
+build PIPC: phony libPIPC.dll
 
 # =============================================================================
 # Folder targets.
@@ -173,7 +183,7 @@ build my_boost_process: phony my_boost_process.exe
 #############################################
 # Folder: C:/Users/Admin/OneDrive/Робочий стіл/Програмування/Збережені файли/ОС/Project/my_boost.process/cmake-build-debug
 
-build all: phony my_boost_process.exe
+build all: phony libPIPC.dll
 
 # =============================================================================
 # Built-in targets
@@ -182,14 +192,14 @@ build all: phony my_boost_process.exe
 #############################################
 # Re-run CMake if any of its inputs changed.
 
-build build.ninja: RERUN_CMAKE | C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/CMakeLists.txt C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake/CompilerWarnings.cmake C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake/Errors.cmake C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake/PVS-Studio-conf.cmake C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake/Sanitizers.cmake C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake/Windows.cmake C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake/main-config.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeRCCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake
+build build.ninja: RERUN_CMAKE | C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/GNUInstallDirs.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/CMakeLists.txt C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake_uninstall.cmake.in CMakeCache.txt CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeRCCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake
   pool = console
 
 
 #############################################
 # A missing CMake input file is not an error.
 
-build C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-C.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/CMakeLists.txt C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake/CompilerWarnings.cmake C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake/Errors.cmake C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake/PVS-Studio-conf.cmake C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake/Sanitizers.cmake C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake/Windows.cmake C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake/main-config.cmake CMakeCache.txt CMakeFiles/3.26.4/CMakeCCompiler.cmake CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeRCCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake: phony
+build C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCXXInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeCommonLanguageInclude.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeGenericSystem.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeInitializeConfigs.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeLanguageInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeRCInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInformation.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/CMakeSystemSpecificInitialize.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/CMakeCommonCompilerMacros.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Compiler/GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/GNUInstallDirs.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX-ABI.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU-CXX.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-GNU.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows-windres.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/Windows.cmake C$:/Program$ Files/JetBrains/CLion$ 2023.2.2/bin/cmake/win/x64/share/cmake-3.26/Modules/Platform/WindowsPaths.cmake C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/CMakeLists.txt C$:/Users/Admin/OneDrive/Робочий$ стіл/Програмування/Збережені$ файли/ОС/Project/my_boost.process/cmake_uninstall.cmake.in CMakeCache.txt CMakeFiles/3.26.4/CMakeCXXCompiler.cmake CMakeFiles/3.26.4/CMakeRCCompiler.cmake CMakeFiles/3.26.4/CMakeSystem.cmake: phony
 
 
 #############################################

@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -g -shared -Wl,-soname,libmy_process.so -o libmy_process.so CMakeFiles/my_process.dir/src/api/IPC_process_creation.cpp.o CMakeFiles/my_process.dir/src/api/process_creation.cpp.o CMakeFiles/my_process.dir/src/linux/linux_proc_creation.cpp.o 
