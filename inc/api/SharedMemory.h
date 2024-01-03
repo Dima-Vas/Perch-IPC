@@ -3,13 +3,16 @@
 #define MY_BOOST_PROCESS_SHARED_MEMORY_H
 
 #ifdef __FreeBSD__
-#define __BEGIN_DECLS extern "C" {
-#define __END_DECLS }
+    #define __BEGIN_DECLS extern "C" {
+    #define __END_DECLS }
 #endif
 
 #include "SharedMutex.h"
+
+#include <string>
+#include <semaphore>
+#include <cstring>
 #include <memory>
-#include <string.h>
 
 template <typename T>
 class SharedMemory {
@@ -51,8 +54,8 @@ public:
         if (close(mem_fd) < 0) {
             std::cerr << "Could not close the memory descriptor in SharedMemory" << std::endl;
         }
-    };
 #endif
+    };
 
     SharedMemory(SharedMemory&) = delete;
 
