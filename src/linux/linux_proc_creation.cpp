@@ -1,4 +1,8 @@
 #include <iostream>
+#ifdef __FreeBSD__
+    #include <sys/types.h>
+    #include <signal.h>
+#endif
 #include <unistd.h>
 #include <sys/wait.h>
 #include <vector>
@@ -78,7 +82,7 @@ int linuxKill(Process& process, int killSig) {
         std::cerr << ("Error from linuxKill : ") << strerror(errno) << std::endl;
         return 1;
     }
-    std::cout << "Killed : " << pid << std::endl;
+    // std::cout << "Killed : " << pid << std::endl;
     return 0;
 }
 

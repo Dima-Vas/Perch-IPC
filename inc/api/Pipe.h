@@ -14,9 +14,9 @@
 #include "Process.h"
 #include <semaphore.h>
 
-#ifdef __linux__
-    #include "../linux/linux_proc_creation.h"
+#if defined(__linux__) || defined(__FreeBSD__)
     #include <unistd.h>
+    #include "../linux/linux_proc_creation.h"
 #endif
 
 /*
@@ -51,7 +51,7 @@ public:
         Connects two Process objects via monodirectional anonymous pipe.
     */
     int connect(Process& out_proc, Process& in_proc) {
-        #ifdef __linux__
+        #if defined(__linux__) || defined(__FreeBSD__)
             original_stdin = dup(STDIN_FILENO);
             original_stdout = dup(STDOUT_FILENO);
             int* created_pipe = linuxPipeRedirectOutput(out_proc, in_proc, launch_sem_name.c_str());
