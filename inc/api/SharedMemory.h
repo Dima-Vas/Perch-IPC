@@ -3,8 +3,9 @@
 #define MY_BOOST_PROCESS_SHARED_MEMORY_H
 
 #ifdef __FreeBSD__
-    #define __BEGIN_DECLS extern "C" {
+    #define __BEGIN_DECLS extern "C" { // somehow stdc++ messes with defines on FreeBSD
     #define __END_DECLS }
+    #include <sys/stat.h>
 #endif
 
 #include "SharedMutex.h"
@@ -26,7 +27,10 @@ public:
         mem_fd(-1),
         data(nullptr)
     {
-#ifdef __linux__
+        #ifdef __FreeBSD__
+            name = "/usr/local/PIPC/data/" + name; // due to shared memory specifics on FreeBSD
+        #endif
+        #if defined(__linux__) || defined(__FreeBSD__)
             const std::string mutex_name = aName + "_mutex";
             mem_fd = shm_open(name.c_str(), O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
             if (mem_fd < 0) {
@@ -40,21 +44,21 @@ public:
                 throw std::runtime_error("Error in SharedMemory");
             }
             ftruncate(mem_fd, size * sizeof(T));
-#endif
+        #endif
     };
 
     ~SharedMemory() {
-#ifdef  __linux__
-        if (shm_unlink(name.c_str()) < 0) {
-            std::cerr << "Could not unlink the memory in SharedMemory" << std::endl;
-        };
-        if (munmap(data, size * sizeof(T)) < 0) {
-            std::cerr << "Could not unmap the data in SharedMemory" << std::endl;
-        };
-        if (close(mem_fd) < 0) {
-            std::cerr << "Could not close the memory descriptor in SharedMemory" << std::endl;
-        }
-#endif
+        #ifdef  __linux__
+                if (shm_unlink(name.c_str()) < 0) {
+                    std::cerr << "Could not unlink the memory in SharedMemory" << std::endl;
+                };
+                if (munmap(data, size * sizeof(T)) < 0) {
+                    std::cerr << "Could not unmap the data in SharedMemory" << std::endl;
+                };
+                if (close(mem_fd) < 0) {
+                    std::cerr << "Could not close the memory descriptor in SharedMemory" << std::endl;
+                }
+        #endif
     };
 
     SharedMemory(SharedMemory&) = delete;
