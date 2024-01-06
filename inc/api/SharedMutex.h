@@ -1,4 +1,3 @@
-
 #ifndef SHARED_MUTEX_H
 #define SHARED_MUTEX_H
 #include <mutex>
@@ -12,7 +11,9 @@
     #include <sys/mman.h>
     #include <sys/stat.h>
 #endif
-
+#if defined(_WIN32)
+    #include <windows.h>
+#endif
 /*
     An IPC Mutex implementation for synchronization of processes in thread-like manner.
     SharedMutex is intended to be used as synchro primitive in classes like SharedMemory, however can be utilized by users as it is.
@@ -26,7 +27,10 @@ public:
         #ifdef __FreeBSD__
             mutex_name = "/usr/local/PIPC/data/" + name; // due to shared memory specifics on FreeBSD
         #endif
-
+        #if defined(_WIN32)
+            std::wstring wname(name.begin(), name.end());
+            mutex_name = L"Global\\" + wname;
+        #endif
         #if defined(__linux__) || defined(__FreeBSD__) 
             shm_fd = shm_open(mutex_name.c_str(), O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
             if (shm_fd == -1) {
@@ -43,12 +47,24 @@ public:
 
             new(shared_data) std::atomic<bool>(false);  // puts atomic bool into shm
         #endif
+        #if defined(_WIN32)
+            mutex_handle = CreateMutexW(nullptr, FALSE, mutex_name.c_str());
+            if (mutex_handle == NULL) {
+                std::cerr << "Error while creating mutex: " << GetLastError() << std::endl;
+                throw std::runtime_error("Error in SharedMutex");
+            }
+        #endif
     }
 
     ~SharedMutex() {
         #if defined(__linux__) || defined(__FreeBSD__)
             munmap(shared_data, sizeof(std::atomic<bool>));
             shm_unlink(mutex_name.c_str());
+        #endif
+        #if defined(_WIN32)
+            if (mutex_handle != NULL) {
+                CloseHandle(mutex_handle);
+            }
         #endif
     }
     SharedMutex() = default;
@@ -65,11 +81,21 @@ public:
                 }
             }
         #endif
+        #if defined(_WIN32)
+            DWORD dwWaitResult = WaitForSingleObject(mutex_handle, INFINITE);
+            if (dwWaitResult != WAIT_OBJECT_0) {
+                std::cerr << "Error while waiting for mutex: " << GetLastError() << std::endl;
+                throw std::runtime_error("Error in SharedMutex");
+            }
+        #endif
     }
 
     void unlock() {
         #if defined(__linux__) || defined(__FreeBSD__)
             shared_data->store(false);
+        #endif
+        #if defined(_WIN32)
+            ReleaseMutex(mutex_handle);
         #endif
     }
 
@@ -78,6 +104,9 @@ private:
     std::string mutex_name;
     #if defined(__linux__) || defined(__FreeBSD__)
         std::atomic<bool>* shared_data;
+    #endif
+    #if defined(_WIN32)
+        HANDLE mutex_handle;
     #endif
 };
 #endif

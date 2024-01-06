@@ -18,7 +18,10 @@
     #include <unistd.h>
     #include "../linux/linux_proc_creation.h"
 #endif
-
+#if defined(_WIN32)
+    #include <unistd.h>
+    #include "../windows/windows_proc_creation.h"
+#endif
 /*
     Provides the interface for the organization of IPC using named pipes.
     Represents a created Pipe and stores information about it.
@@ -63,6 +66,18 @@ public:
             output_process = out_proc;
             input_process = in_proc;
         #endif
+        #if defined(_WIN32)
+            original_stdin = dup(STDIN_FILENO);
+            original_stdout = dup(STDOUT_FILENO);
+            int* created_pipe = windowsPipeRedirectOutput(out_proc, in_proc, launch_sem_name.c_str());
+            if (created_pipe == nullptr) {
+                return -1;
+            }
+            output_fd = created_pipe[1];
+            input_fd = created_pipe[0];
+            output_process = out_proc;
+            input_process = in_proc;
+        #endif
         return 0;
     }
 
@@ -93,6 +108,13 @@ private:
     int init_named_semaphore() {
         generate_unique_name();
         #if defined(__linux__) || defined(__FreeBSD__)
+            launch_sem = sem_open(launch_sem_name.c_str(), O_CREAT | O_EXCL , 0644, 0);
+            if (launch_sem == SEM_FAILED) {
+                perror("Bad semaphore");
+                throw std::runtime_error("Bad semaphore at Pipe");
+            }
+        #endif
+        #if defined(_WIN32)
             launch_sem = sem_open(launch_sem_name.c_str(), O_CREAT | O_EXCL , 0644, 0);
             if (launch_sem == SEM_FAILED) {
                 perror("Bad semaphore");

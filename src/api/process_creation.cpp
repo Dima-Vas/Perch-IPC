@@ -6,6 +6,9 @@ int ProcessCreation::launch(Process& process) {
     #if defined(__linux__) || defined(__FreeBSD__)
         launchedPID = linuxLaunch(process);
     #endif
+    #if defined(_WIN32)
+        launchedPID = windowsLaunch(process);
+    #endif
     return launchedPID;
 }
 
@@ -14,12 +17,18 @@ int ProcessCreation::wait_for_exit(Process& process) {
     #if defined(__linux__) || defined(__FreeBSD__)
         status = linuxWaitForExit(process);
     #endif
+    #if defined(_WIN32)
+        status = windowsWaitForExit(process);
+    #endif
     return status;
 }
 
 int ProcessCreation::kill(Process& process, int killsig) {
     #if defined(__linux__) || defined(__FreeBSD__)
         return linuxKill(process, killsig);
+    #endif
+    #if defined(_WIN32)
+        launchedPID = windowsLaunch(process);
     #endif
     return 0;
 }

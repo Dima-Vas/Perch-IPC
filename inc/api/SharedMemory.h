@@ -45,6 +45,21 @@ public:
             }
             ftruncate(mem_fd, size * sizeof(T));
         #endif
+        #if defined(_WIN32)
+            const std::string mutex_name = aName + "_mutex";
+            mem_fd = shm_open(name.c_str(), O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
+            if (mem_fd < 0) {
+                std::cerr << "Cannot get shared memory" << strerror(errno) <<  std::endl;
+                throw std::runtime_error("Error in SharedMemory");
+            }
+            data = (T*)(mmap(nullptr, size * sizeof(T), PROT_READ | PROT_WRITE,  MAP_SHARED, mem_fd, 0));
+            if (data == MAP_FAILED) {
+                close(mem_fd);
+                std::cerr << "Cannot get memory map : " << strerror(errno) << std::endl;
+                throw std::runtime_error("Error in SharedMemory");
+            }
+            ftruncate(mem_fd, size * sizeof(T));
+        #endif
     };
 
     ~SharedMemory() {
@@ -58,6 +73,17 @@ public:
                 if (close(mem_fd) < 0) {
                     std::cerr << "Could not close the memory descriptor in SharedMemory" << std::endl;
                 }
+        #endif
+        #if defined(_WIN32)
+            if (shm_unlink(name.c_str()) < 0) {
+                std::cerr << "Could not unlink the memory in SharedMemory" << std::endl;
+            };
+            if (munmap(data, size * sizeof(T)) < 0) {
+                std::cerr << "Could not unmap the data in SharedMemory" << std::endl;
+            };
+            if (close(mem_fd) < 0) {
+                std::cerr << "Could not close the memory descriptor in SharedMemory" << std::endl;
+            }
         #endif
     };
 

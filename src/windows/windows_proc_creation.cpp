@@ -2,8 +2,6 @@
 #include <unistd.h>
 #include <vector>
 #include <string.h>
-#include "Process.h"
-#include <semaphore.h>
 #include <windows.h>
 #include <string>
 #include "windows_proc_creation.h"
