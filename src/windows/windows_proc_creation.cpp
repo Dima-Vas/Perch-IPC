@@ -61,7 +61,7 @@ int windowsLaunch(Process& process) {
     return 0;
 }
 
-int windowsKill(Process& process, UINT killSig = CTRL_C_EVENT) {
+int windowsKill(Process& process, int killSig) {
     DWORD pid = static_cast<DWORD>(process.getPID());
     HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, pid);
     if (hProcess == NULL) {

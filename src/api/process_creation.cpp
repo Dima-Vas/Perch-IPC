@@ -28,7 +28,7 @@ int ProcessCreation::kill(Process& process, int killsig) {
         return linuxKill(process, killsig);
     #endif
     #if defined(_WIN32)
-        launchedPID = windowsLaunch(process);
+        return windowsKill(process, killsig);
     #endif
     return 0;
 }

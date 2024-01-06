@@ -13,6 +13,7 @@
 #endif
 #if defined(_WIN32)
     #include <windows.h>
+    #include <synchapi.h>
 #endif
 /*
     An IPC Mutex implementation for synchronization of processes in thread-like manner.
@@ -29,7 +30,9 @@ public:
         #endif
         #if defined(_WIN32)
             std::wstring wname(name.begin(), name.end());
-            mutex_name = L"Global\\" + wname;
+            std::wstring prefix = L"Global\\";
+            std::wstring combinedName = prefix + wname;
+            mutex_name = combinedName;
         #endif
         #if defined(__linux__) || defined(__FreeBSD__) 
             shm_fd = shm_open(mutex_name.c_str(), O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
@@ -101,12 +104,13 @@ public:
 
 private:
     int shm_fd;
-    std::string mutex_name;
     #if defined(__linux__) || defined(__FreeBSD__)
+        std::string mutex_name;
         std::atomic<bool>* shared_data;
     #endif
     #if defined(_WIN32)
         HANDLE mutex_handle;
+        std::wstring mutex_name;
     #endif
 };
 #endif
