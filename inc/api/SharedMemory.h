@@ -1,3 +1,7 @@
+/**
+ * @file SharedMemory.h
+ * @brief This file contains the declaration of SharedMemory class.
+ */
 
 #ifndef MY_BOOST_PROCESS_SHARED_MEMORY_H
 #define MY_BOOST_PROCESS_SHARED_MEMORY_H
@@ -19,9 +23,23 @@
 #include <cstring>
 #include <memory>
 
+/**
+ * @class SharedMemory
+ * @brief A class for management and representation of shared memory chunk.
+ *
+ * Initializes shared memory chunk of static size, provides an API allowing to manipulate it excluding the
+ * possibility of any race conditions and unmaps the resources after no longer needed.
+ * @warning This class does not support default constructors.
+ */
 template <typename T>
 class SharedMemory {
 public:
+
+    /**
+     * @brief Basic constructor for SharedMemory class.
+     * @param aName unique string name for shared memory identification.
+     * @param aSize maximal number of elements that this chunk can contain.
+     */
     SharedMemory(const std::string& aName, size_t aSize) :
         name(aName),
         size(aSize),
@@ -95,9 +113,11 @@ public:
 
     SharedMemory(SharedMemory&) = delete;
 
-    /*
-     * Writes the to_write to idx while preventing the racing write from another process
-    */
+    /**
+     * @brief Writes new element to the chunk on the given index.
+     * @param to_write an element to write
+     * @param idx an index of the element to write. If -1, writes to the first free position in chunk.
+     */
     void write(const T& to_write, size_t idx) {
         sh_mutex.lock();
         if (frozen) {
@@ -127,6 +147,10 @@ public:
         sh_mutex.unlock();
     }
 
+    /**
+     * @brief Reads an element on the given index.
+     * @param idx an index of the element to read.
+     */
     T& read(size_t idx) {
         sh_mutex.lock();
         if (idx >= size) {
@@ -138,11 +162,14 @@ public:
         return to_ret;
     }
 
-    /*
-     * Returns the previous value of the idx'th element of data, swapping it with new_value.
+    /**
+     * @brief Returns the previous value of the idx'th element of data, swapping it with new_value.
      * Should be used as CAS operation, i.e. combined read-write operation.
+     * @param idx an index of the element to compare-and-swap.
+     * @param new_value the new value to swap with existing one.
+     * @return The value swapped out from the memory.
      */
-    T& compare_and_swap(size_t idx, const T& new_value) {
+    T& compare_and_swap(size_t idx, T& new_value) {
         sh_mutex.lock();
         if (frozen) {
             sh_mutex.unlock();
@@ -162,12 +189,13 @@ public:
         return current_value;
     }
 
-    /*
-     * Make memory unable to be written anymore.
+    /**
+     * @brief Makes the memory unable to be written. When trying to write or compare-and-swap to 
+     * a "frozen" memory, runtime error is raised.
      */
     void freeze() {
         frozen = true;
-    };
+    }
 
     bool is_frozen() {
         return frozen;

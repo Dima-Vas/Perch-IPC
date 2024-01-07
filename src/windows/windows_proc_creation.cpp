@@ -98,7 +98,6 @@ int windowsWaitForExit(Process& process) {
 }
 
 
-
 int* windowsPipeRedirectOutput(Process& out_process, Process& in_process, const char* sem_name) {
     SECURITY_ATTRIBUTES saAttr;
     saAttr.nLength = sizeof(SECURITY_ATTRIBUTES);

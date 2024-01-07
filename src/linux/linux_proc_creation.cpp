@@ -77,7 +77,7 @@ int linuxKill(Process& process, int killSig) {
 
     pid_t pid = process.getPID();
 
-    std::cout << pid << std::endl;
+    // std::cout << pid << std::endl;
     if (kill(pid, killSig) != 0) {
         std::cerr << ("Error from linuxKill : ") << strerror(errno) << std::endl;
         return 1;
@@ -116,7 +116,7 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
 
     if (pipe(pipe_fd) == -1) {
         std::cerr << "Error from linuxPipeRedirectOutput : " << strerror(errno) << std::endl;
-        return nullptr;
+        throw std::runtime_error("Bad pipe");
     }
 
     output_pid = fork();
@@ -132,7 +132,7 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
             close(pipe_fd[0]);
             close(pipe_fd[1]);
             std::cerr << "Error from linuxPipeRedirectOutput : " << strerror(errno) << std::endl;
-            return nullptr;
+            throw std::runtime_error("Bad dup2 at provider");
         }
         sem_t * sem = sem_open(sem_name, 0);
         if (sem == SEM_FAILED) {
@@ -160,7 +160,7 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
             close(pipe_fd[0]);
             close(pipe_fd[1]);
             std::cerr << "Error from linuxPipeRedirectOutput : " << strerror(errno) << std::endl;
-            return nullptr;
+            throw std::runtime_error("Bad dup2 at consumer");
         }
         close(pipe_fd[0]);
 

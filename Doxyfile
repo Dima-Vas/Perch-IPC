@@ -1,0 +1,10 @@
+PROJECT_NAME           = "PIPC"
+PROJECT_NUMBER         = 0.1
+
+INPUT                  = ./src/api ./inc/api
+
+
+OUTPUT_DIRECTORY       = ./doc
+GENERATE_HTML          = YES
+
+GENERATE_LATEX         = NO

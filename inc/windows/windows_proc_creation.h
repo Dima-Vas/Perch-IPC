@@ -1,6 +1,5 @@
 #ifndef WIN32_PROC_CREATION
 #define WIN32_PROC_CREATION
-#include <signal.h>
 #include "../api/Process.h"
 #include <semaphore.h>
 int windowsLaunch(Process&);

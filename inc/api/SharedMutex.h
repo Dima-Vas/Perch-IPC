@@ -1,3 +1,8 @@
+/**
+ * @file SharedMutex.h
+ * @brief This file contains the declaration of SharedMutex class.
+ */
+
 #ifndef SHARED_MUTEX_H
 #define SHARED_MUTEX_H
 #include <mutex>
@@ -5,6 +10,7 @@
 #include <string>
 #include <exception>
 #include <atomic>
+
 #if defined(__linux__) || defined(__FreeBSD__)
     #include <unistd.h>
     #include <fcntl.h>
@@ -15,12 +21,21 @@
     #include <windows.h>
     #include <synchapi.h>
 #endif
-/*
-    An IPC Mutex implementation for synchronization of processes in thread-like manner.
-    SharedMutex is intended to be used as synchro primitive in classes like SharedMemory, however can be utilized by users as it is.
-*/
+
+/**
+ * @class SharedMutex
+ * @brief An IPC Mutex implementation for synchronization of processes in thread-like manner.
+ *
+ * Although being possible to be utilized by one as it is, SharedMutex is originally intended to be used as simple synchro mechanism in more complex structures.
+ * @warning This class does not support default constructors.
+ */
 class SharedMutex {
 public:
+
+    /**
+     * @brief Basic constructor for SharedMutex class.
+     * @param name unique string name for shared mutex identification.
+     */
     SharedMutex(const std::string& name) {
         #ifdef __linux__
             mutex_name = name;
@@ -51,7 +66,7 @@ public:
             new(shared_data) std::atomic<bool>(false);  // puts atomic bool into shm
         #endif
         #if defined(_WIN32)
-            mutex_handle = CreateMutexW(nullptr, FALSE, mutex_name.c_str());
+            mutex_handle = CreateMutex(nullptr, FALSE, mutex_name.c_str());
             if (mutex_handle == NULL) {
                 std::cerr << "Error while creating mutex: " << GetLastError() << std::endl;
                 throw std::runtime_error("Error in SharedMutex");
@@ -70,12 +85,14 @@ public:
             }
         #endif
     }
-    SharedMutex() = default;
 
     SharedMutex(SharedMutex&) = delete;
 
     SharedMutex& operator=(SharedMutex&) = delete;
 
+    /**
+     * @brief Locks mutex.
+     */
     void lock() {
         #if defined(__linux__) || defined(__FreeBSD__)
             while (true) {
@@ -93,6 +110,9 @@ public:
         #endif
     }
 
+    /**
+     * @brief Unlocks mutex.
+     */
     void unlock() {
         #if defined(__linux__) || defined(__FreeBSD__)
             shared_data->store(false);
