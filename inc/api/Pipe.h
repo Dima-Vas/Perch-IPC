@@ -17,14 +17,16 @@
 
 
 #include "Process.h"
-#include <semaphore.h>
+
 
 #if defined(__linux__) || defined(__FreeBSD__)
+    #include <semaphore.h>
     #include <unistd.h>
     #include "../linux/linux_proc_creation.h"
 #endif
 #if defined(_WIN32)
-    #include <unistd.h>
+    #include <io.h>
+    #include <windows.h>
     #include "../windows/windows_proc_creation.h"
 #endif
 
@@ -90,12 +92,9 @@ public:
             input_process = in_proc;
         #endif
         #if defined(_WIN32)
-            original_stdin = dup(STDIN_FILENO);
-            original_stdout = dup(STDOUT_FILENO);
+            original_stdin = _dup(_fileno(stdin));
+            original_stdout = _dup(_fileno(stdout));
             int* created_pipe = windowsPipeRedirectOutput(out_proc, in_proc, launch_sem_name.c_str());
-            if (created_pipe == nullptr) {
-                return -1;
-            }
             output_fd = created_pipe[1];
             input_fd = created_pipe[0];
             output_process = out_proc;
@@ -108,14 +107,27 @@ public:
      * @brief Launches two Processes linked by this Pipe. The output of Pipe::input_process is transfered to the Pipe::output_process.
      */
     int transfer() {
-        if (sem_post(launch_sem) != 0) {
-            perror("Error when post from Pipe");
-            return -1;
-        }
-        if (sem_post(launch_sem) != 0 != 0) {
-            perror("Error when post from Pipe");
-            return -1;
-        }
+        #if defined(__linux__) || defined(__FreeBSD__)
+                // POSIX Semaphore implementation
+                        if (sem_post(launch_sem) != 0) {
+                            perror("Error when post from Pipe");
+                            return -1;
+                        }
+                        if (sem_post(launch_sem) != 0 != 0) {
+                            perror("Error when post from Pipe");
+                            return -1;
+                        }
+        #endif
+        #if defined(_WIN32)
+                // Windows Semaphore implementation
+                if (!ReleaseSemaphore(
+                        launch_sem, // Semaphore handle
+                        1,          // Release count
+                        NULL)) {    // Not used, reserved for future use, should be NULL
+                    std::cerr << "Error when releasing semaphore: " << GetLastError() << std::endl;
+                    return -1;
+                }
+        #endif
         return 0;
     }
 
@@ -126,7 +138,12 @@ private:
     int original_stdin;
     Process output_process;
     Process input_process;
-    sem_t * launch_sem;
+    #if defined(__linux__) || defined(__FreeBSD__)
+        sem_t * launch_sem;
+    #endif
+    #if defined(_WIN32)
+        HANDLE launch_sem;
+    #endif
     std::string launch_sem_name;
 
     int init_named_semaphore() {
@@ -139,10 +156,15 @@ private:
             }
         #endif
         #if defined(_WIN32)
-            launch_sem = sem_open(launch_sem_name.c_str(), O_CREAT | O_EXCL , 0644, 0);
-            if (launch_sem == SEM_FAILED) {
-                perror("Bad semaphore");
-                throw std::runtime_error("Bad semaphore at Pipe");
+            launch_sem = CreateSemaphore(
+                    NULL,                  // Default security attributes
+                    0,                     // Initial count
+                    1,                     // Maximum count
+                    launch_sem_name.c_str() // Semaphore name
+            );
+            if (launch_sem == NULL) {
+                std::cerr << "Error creating semaphore: " << GetLastError() << std::endl;
+                return -1;
             }
         #endif
         return 0;
