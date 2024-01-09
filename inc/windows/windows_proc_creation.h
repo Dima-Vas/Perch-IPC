@@ -1,7 +1,7 @@
 #ifndef WIN32_PROC_CREATION
 #define WIN32_PROC_CREATION
 #include "../api/Process.h"
-#include <semaphore.h>
+#include <io.h>
 int windowsLaunch(Process&);
 int windowsKill(Process&, int killSig);
 int windowsWaitForExit(Process&);
