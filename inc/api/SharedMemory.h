@@ -13,7 +13,6 @@
 #endif
 #if defined(_WIN32)
     #include <windows.h>
-    HANDLE mem_handle;
 #endif
 
 #include "SharedMutex.h"
@@ -41,12 +40,10 @@ public:
      * @param aSize maximal number of elements that this chunk can contain.
      */
     SharedMemory(const std::string& aName, size_t aSize) :
-        name(aName),
         size(aSize),
         capacity(0),
         frozen(false),
-        sh_mutex(aName + "_mutex"),
-        mem_fd(-1),
+        sh_mutex(aName + "Mutex"),
         data(nullptr)
     {
         #ifdef __FreeBSD__
@@ -68,22 +65,28 @@ public:
             ftruncate(mem_fd, size * sizeof(T));
         #endif
         #if defined(_WIN32)
-            mem_handle = CreateFileMapping(
-                    INVALID_HANDLE_VALUE,
-                    NULL,
-                    PAGE_READWRITE,
-                    0,
-                    size * sizeof(T),
-                    name.c_str()
-            );
-            if (mem_handle == NULL) {
-                std::cerr << "Could not create file mapping object in SharedMemory: " << GetLastError() << std::endl;
-                throw std::runtime_error("Error in SharedMemory");
+            std::wstring wname(aName.begin(), aName.end());
+            std::wstring prefix = L"Global\\";
+            std::wstring combinedName = prefix + wname;
+            name = combinedName;
+            mem_fd = OpenFileMappingW(FILE_MAP_ALL_ACCESS, FALSE, name.c_str());
+            if (mem_fd == nullptr) {
+                DWORD lastError = GetLastError();
+                if (lastError == ERROR_FILE_NOT_FOUND) {
+                    mem_fd = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, size * sizeof(T), name.c_str());
+                    if (mem_fd == nullptr) {
+                        std::cerr << "Cannot get shared memory at all: " << GetLastError() << std::endl;
+                        throw std::runtime_error("Error in SharedMemory");
+                    }
+                } else {
+                    std::cerr << "Cannot get shared memory: " << lastError << std::endl;
+                    throw std::runtime_error("Error in SharedMemory");
+                }
             }
-            data = (T*)MapViewOfFile(mem_handle, FILE_MAP_ALL_ACCESS, 0, 0, size * sizeof(T));
+            data = static_cast<T*>(MapViewOfFile(mem_fd, FILE_MAP_ALL_ACCESS, 0, 0, size * sizeof(T)));
             if (data == nullptr) {
-                CloseHandle(mem_handle);
-                std::cerr << "Could not map view of file in SharedMemory: " << GetLastError() << std::endl;
+                CloseHandle(mem_fd);
+                std::cerr << "Cannot map data of SharedMemory: " << GetLastError() << std::endl;
                 throw std::runtime_error("Error in SharedMemory");
             }
         #endif
@@ -102,12 +105,8 @@ public:
                 }
         #endif
         #if defined(_WIN32)
-            if (data != nullptr) {
-                UnmapViewOfFile(data);
-            }
-            if (mem_handle != NULL) {
-                CloseHandle(mem_handle);
-            }
+            UnmapViewOfFile(data);
+            CloseHandle(mem_fd);
         #endif
     };
 
@@ -150,6 +149,7 @@ public:
     /**
      * @brief Reads an element on the given index.
      * @param idx an index of the element to read.
+     * @return The current value on ith index.
      */
     T& read(size_t idx) {
         sh_mutex.lock();
@@ -206,13 +206,20 @@ public:
     }
 
 private :
-    std::string name;
+    
     size_t size;
     size_t capacity;
     bool frozen;
     SharedMutex sh_mutex;
-    int mem_fd;
     T* data;
+    #ifdef _WIN32
+       HANDLE mem_fd;
+       std::wstring name;
+    #endif
+    #ifdef __linux__
+        int mem_fd;
+        std::string name;
+    #endif
 };
 
 #endif //MY_BOOST_PROCESS_SHARED_MEMORY_H

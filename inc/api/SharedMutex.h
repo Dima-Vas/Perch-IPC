@@ -68,16 +68,10 @@ public:
             new(shared_data) std::atomic<bool>(false); // puts atomic bool into shm
         #endif
         #if defined(_WIN32)
-            mutex_memory = CreateFileMappingW(INVALID_HANDLE_VALUE, nullptr, PAGE_READWRITE, 0, sizeof(std::atomic<bool>), mutex_name.c_str());
+            mutex_memory = CreateMutexW(nullptr, FALSE, mutex_name.c_str());
             if (mutex_memory == nullptr) {
-                std::cerr << "Error creating/shared memory: " << GetLastError() << std::endl;
-                throw std::runtime_error("Error in InterprocessMutex");
-            }
-
-            shared_data = static_cast<std::atomic<bool>*>(MapViewOfFile(mutex_memory, FILE_MAP_ALL_ACCESS, 0, 0, sizeof(std::atomic<bool>)));
-            if (shared_data == nullptr) {
-                std::cerr << "Error mapping shared memory: " << GetLastError() << std::endl;
-                throw std::runtime_error("Error in InterprocessMutex");
+                std::cerr << "Error while creating shared mutex: " << GetLastError() << std::endl;
+                throw std::runtime_error("Error in SharedMutex");
             }
         #endif
     }
@@ -88,9 +82,7 @@ public:
             shm_unlink(mutex_name.c_str());
         #endif
         #if defined(_WIN32)
-            if (mutex_memory != NULL) {
-                CloseHandle(mutex_memory);
-            }
+            CloseHandle(mutex_memory);
         #endif
     }
 
@@ -102,29 +94,39 @@ public:
      * @brief Locks mutex.
      */
     void lock() {
-        while (true) {
-            if (!shared_data->exchange(true)) {
-                return;
+        #if defined(__linux__) || defined(__FreeBSD__)
+            while (true) {
+                if (!shared_data->exchange(true)) {
+                    return;
+                }
             }
-        }
+        #endif
+        #if defined(_WIN32)
+            WaitForSingleObject(mutex_memory, INFINITE);
+        #endif
     }
 
     /**
      * @brief Unlocks mutex.
      */
     void unlock() {
-        shared_data->store(false);
+        #if defined(__linux__) || defined(__FreeBSD__)
+            shared_data->store(false);
+        #endif
+        #if defined(_WIN32)
+            ReleaseMutex(mutex_memory);
+        #endif
     }
 
 private:
     #if defined(__linux__) || defined(__FreeBSD__)
         int shm_fd;
         std::string mutex_name;
+        std::atomic<bool>* shared_data;
     #endif
     #if defined(_WIN32)
         HANDLE mutex_memory;
         std::wstring mutex_name;
     #endif
-    std::atomic<bool>* shared_data;
 };
 #endif

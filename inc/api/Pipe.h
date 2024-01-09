@@ -24,7 +24,7 @@
     #include "../linux/linux_proc_creation.h"
 #endif
 #if defined(_WIN32)
-    #include <unistd.h>
+    #include <windows.h>
     #include "../windows/windows_proc_creation.h"
 #endif
 
