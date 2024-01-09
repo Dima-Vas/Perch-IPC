@@ -155,13 +155,18 @@ private:
         std::mt19937 generator(random_device());
         std::uniform_int_distribution<> distribution(0, chars.size() - 1);
         std::ostringstream oss;
-        oss << "/" << getpid() << "_";
+        #ifdef __linux__
+            oss << "/" << getpid() << "_";
+        #endif
+        #if defined(_WIN32)
+            oss << "/" << GetCurrentProcessId() << "_";
+        #endif
         std::string random_string = oss.str();
 
         for (std::size_t i = 0; i < chars.length(); ++i) {
             random_string += chars[distribution(generator)];
         }
-        
+
         launch_sem_name = random_string;
     }
 };
