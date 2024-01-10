@@ -18,15 +18,10 @@
 */
 void launchChild(Process& process) {
     std::string executablePath = process.getPath();
-    // std::cout << "Executing " << process.getPID() << std::endl;
-    // for (std::string str : process.getArguments()) {
-    //     std::cout << str << std::endl;
-    // }
 
     std::vector<std::string> arguments = process.getArguments();
     std::vector<char*> argv;
     for (auto& arg : arguments) {
-        // Push pointers to each arg
         argv.push_back(strdup(&arg[0]));
     }
 
@@ -36,7 +31,6 @@ void launchChild(Process& process) {
 
     execvp(executablePath.c_str(), argvArray);
 
-    // Reached only if error occured
     std::cerr << "Error: Exec failed." << std::endl;
     for (char* arg : argv) {
         free(arg);
@@ -49,7 +43,6 @@ void launchChild(Process& process) {
     Wrapped into ProcessCreation::launch
 */
 int linuxLaunch(Process& process) {
-
     pid_t pid = fork();
 
     if (pid < 0) {
@@ -63,7 +56,6 @@ int linuxLaunch(Process& process) {
     } else { // Parent
         int status;
         process.setPID(pid);
-        // std::cout << "in linuxLaunch : " << process.getPID() << std::endl;
         return pid;
     }
 }
@@ -74,15 +66,11 @@ int linuxLaunch(Process& process) {
     Wrapped into ProcessCreation::kill
 */
 int linuxKill(Process& process, int killSig) {
-
     pid_t pid = process.getPID();
-
-    std::cout << pid << std::endl;
     if (kill(pid, killSig) != 0) {
         std::cerr << ("Error from linuxKill : ") << strerror(errno) << std::endl;
         return 1;
     }
-    // std::cout << "Killed : " << pid << std::endl;
     return 0;
 }
 
@@ -107,7 +95,6 @@ int linuxWaitForExit(Process& process) {
     @param in_process Process
 */
 int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const char* sem_name) {
-
     pid_t output_pid;
     pid_t input_pid;
     int stdin_fd = STDIN_FILENO;
@@ -116,7 +103,7 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
 
     if (pipe(pipe_fd) == -1) {
         std::cerr << "Error from linuxPipeRedirectOutput : " << strerror(errno) << std::endl;
-        return nullptr;
+        throw std::runtime_error("Bad pipe");
     }
 
     output_pid = fork();
@@ -132,7 +119,7 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
             close(pipe_fd[0]);
             close(pipe_fd[1]);
             std::cerr << "Error from linuxPipeRedirectOutput : " << strerror(errno) << std::endl;
-            return nullptr;
+            throw std::runtime_error("Bad dup2 at provider");
         }
         sem_t * sem = sem_open(sem_name, 0);
         if (sem == SEM_FAILED) {
@@ -160,7 +147,7 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
             close(pipe_fd[0]);
             close(pipe_fd[1]);
             std::cerr << "Error from linuxPipeRedirectOutput : " << strerror(errno) << std::endl;
-            return nullptr;
+            throw std::runtime_error("Bad dup2 at consumer");
         }
         close(pipe_fd[0]);
 

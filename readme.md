@@ -1,5 +1,6 @@
 # Crossplatform C++ IPC library 
 
+=======
 This library provides a simple C++ interprocess communication interface for multiple platforms including Windows and POSIX-compatible operating systems like Linux and FreeBSD.
 
 ## Content

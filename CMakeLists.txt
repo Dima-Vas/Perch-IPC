@@ -10,12 +10,10 @@ endif()
 include(GNUInstallDirs)
 if(WIN32)
     set(SOURCE_FILES
-            src/api/IPC_process_creation.cpp
             src/windows/windows_proc_creation.cpp
             src/api/process_creation.cpp)
 elseif(UNIX)
     set(SOURCE_FILES
-            src/api/IPC_process_creation.cpp
             src/linux/linux_proc_creation.cpp
             src/api/process_creation.cpp)
 endif()

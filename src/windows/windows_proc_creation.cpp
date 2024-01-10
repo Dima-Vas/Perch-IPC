@@ -1,10 +1,7 @@
 #include <iostream>
-#include <unistd.h>
 #include <vector>
-#include <string.h>
-#include "Process.h"
-#include <semaphore.h>
 #include <windows.h>
+#include <io.h>
 #include <string>
 #include "windows_proc_creation.h"
 
@@ -28,7 +25,8 @@ LPWSTR* ConvertToLPWSTRArray(const std::vector<std::string>& args) {
     return argv;
 }
 
-void launchChild(Process& process) {
+
+int windowsLaunch(Process& process) {
     std::wstring executablePath = ConvertToWideString(process.getPath());
     std::vector<std::string> arguments = process.getArguments();
     LPWSTR* argv = ConvertToLPWSTRArray(arguments);
@@ -51,20 +49,18 @@ void launchChild(Process& process) {
             &pi
     )) {
         std::cerr << "Error: CreateProcess failed. Error code: " << GetLastError() << std::endl;
+        throw new std::runtime_error("Bad windowsLaunch");
     }
+    process.setPID(pi.hProcess);
     for (int i = 0; argv[i] != nullptr; ++i) {
         delete[] argv[i];
     }
-    delete[] argv;
-}
-
-int windowsLaunch(Process& process) {
-    launchChild(process);
     return 0;
 }
 
-int windowsKill(Process& process, UINT killSig = CTRL_C_EVENT) {
-    DWORD pid = static_cast<DWORD>(process.getPID());
+
+int windowsKill(Process& process, int killSig) {
+    DWORD pid = GetProcessId(process.getPID());
     HANDLE hProcess = OpenProcess(PROCESS_TERMINATE, FALSE, pid);
     if (hProcess == NULL) {
         std::cerr << "Error: Unable to open process. Error code: " << GetLastError() << std::endl;
@@ -75,13 +71,13 @@ int windowsKill(Process& process, UINT killSig = CTRL_C_EVENT) {
         CloseHandle(hProcess);
         return 1;
     }
-    std::cout << "Killed: " << pid << std::endl;
     CloseHandle(hProcess);
     return 0;
 }
 
+
 int windowsWaitForExit(Process& process) {
-    DWORD pid = static_cast<DWORD>(process.getPID());
+    DWORD pid = GetProcessId(process.getPID());
     HANDLE hProcess = OpenProcess(SYNCHRONIZE, FALSE, pid);
     if (hProcess == NULL) {
         std::cerr << "Error: Unable to open process. Error code: " << GetLastError() << std::endl;
@@ -98,7 +94,6 @@ int windowsWaitForExit(Process& process) {
     CloseHandle(hProcess);
     return static_cast<int>(exitCode);
 }
-
 
 
 int* windowsPipeRedirectOutput(Process& out_process, Process& in_process, const char* sem_name) {
@@ -127,7 +122,7 @@ int* windowsPipeRedirectOutput(Process& out_process, Process& in_process, const 
     siStartInfo.dwFlags |= STARTF_USESTDHANDLES;
     bSuccess = CreateProcessA(
             NULL,
-            const_cast<LPSTR>(out_process.getPath().c_str()),  // Executable path (as LPSTR)
+            const_cast<LPSTR>(out_process.getPath().c_str()),
             NULL,
             NULL,
             TRUE,

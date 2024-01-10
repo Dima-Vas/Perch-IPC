@@ -1,3 +1,7 @@
+/**
+ * @file SharedMutex.h
+ * @brief This file contains the declaration of SharedMutex class.
+ */
 
 #ifndef SHARED_MUTEX_H
 #define SHARED_MUTEX_H
@@ -6,19 +10,34 @@
 #include <string>
 #include <exception>
 #include <atomic>
+
 #if defined(__linux__) || defined(__FreeBSD__)
     #include <unistd.h>
     #include <fcntl.h>
     #include <sys/mman.h>
     #include <sys/stat.h>
 #endif
+#if defined(_WIN32)
+    #include <windows.h>
+    #include <synchapi.h>
+    #include <locale>
+    #include <codecvt>
+#endif
 
-/*
-    An IPC Mutex implementation for synchronization of processes in thread-like manner.
-    SharedMutex is intended to be used as synchro primitive in classes like SharedMemory, however can be utilized by users as it is.
-*/
+/**
+ * @class SharedMutex
+ * @brief An IPC Mutex implementation for synchronization of processes in thread-like manner.
+ *
+ * Although being possible to be utilized as it is, SharedMutex is originally intended to be used as simple synchro mechanism in more complex structures.
+ * @warning This class does not support default constructors.
+ */
 class SharedMutex {
 public:
+
+    /**
+     * @brief Basic constructor for SharedMutex class.
+     * @param name unique string name for shared mutex identification.
+     */
     SharedMutex(const std::string& name) {
         #ifdef __linux__
             mutex_name = name;
@@ -26,7 +45,12 @@ public:
         #ifdef __FreeBSD__
             mutex_name = "/usr/local/PIPC/data/" + name; // due to shared memory specifics on FreeBSD
         #endif
-
+        #if defined(_WIN32)
+            std::wstring wname(name.begin(), name.end());
+            std::wstring prefix = L"Global\\";
+            std::wstring combinedName = prefix + wname;
+            mutex_name = combinedName;
+        #endif
         #if defined(__linux__) || defined(__FreeBSD__) 
             shm_fd = shm_open(mutex_name.c_str(), O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
             if (shm_fd == -1) {
@@ -41,7 +65,14 @@ public:
                 throw std::runtime_error("Error in SharedMutex");
             }
 
-            new(shared_data) std::atomic<bool>(false);  // puts atomic bool into shm
+            new(shared_data) std::atomic<bool>(false); // puts atomic bool into shm
+        #endif
+        #if defined(_WIN32)
+            mutex_memory = CreateMutexW(nullptr, FALSE, mutex_name.c_str());
+            if (mutex_memory == nullptr) {
+                std::cerr << "Error while creating shared mutex: " << GetLastError() << std::endl;
+                throw std::runtime_error("Error in SharedMutex");
+            }
         #endif
     }
 
@@ -50,13 +81,18 @@ public:
             munmap(shared_data, sizeof(std::atomic<bool>));
             shm_unlink(mutex_name.c_str());
         #endif
+        #if defined(_WIN32)
+            CloseHandle(mutex_memory);
+        #endif
     }
-    SharedMutex() = default;
 
     SharedMutex(SharedMutex&) = delete;
 
     SharedMutex& operator=(SharedMutex&) = delete;
 
+    /**
+     * @brief Anonimously locks mutex, indefinitely preventing other from accessing critical section.
+     */
     void lock() {
         #if defined(__linux__) || defined(__FreeBSD__)
             while (true) {
@@ -65,19 +101,32 @@ public:
                 }
             }
         #endif
+        #if defined(_WIN32)
+            WaitForSingleObject(mutex_memory, INFINITE);
+        #endif
     }
 
+    /**
+     * @brief Unlocks mutex, allowing others to lock it.
+     */
     void unlock() {
         #if defined(__linux__) || defined(__FreeBSD__)
             shared_data->store(false);
         #endif
+        #if defined(_WIN32)
+            ReleaseMutex(mutex_memory);
+        #endif
     }
 
 private:
-    int shm_fd;
-    std::string mutex_name;
     #if defined(__linux__) || defined(__FreeBSD__)
+        int shm_fd;
+        std::string mutex_name;
         std::atomic<bool>* shared_data;
+    #endif
+    #if defined(_WIN32)
+        HANDLE mutex_memory;
+        std::wstring mutex_name;
     #endif
 };
 #endif
