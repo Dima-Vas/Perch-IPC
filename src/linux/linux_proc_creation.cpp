@@ -123,7 +123,7 @@ int* linuxPipeRedirectOutput(Process& out_process, Process& in_process, const ch
         }
         sem_t * sem = sem_open(sem_name, 0);
         if (sem == SEM_FAILED) {
-            perror("Bad semaphore");
+            perror("Bad semaphore at linuxPipeRedirectOutput");
             throw std::runtime_error("Bad semaphore at provider");
         }
         close(pipe_fd[1]);

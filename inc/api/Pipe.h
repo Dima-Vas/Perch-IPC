@@ -125,6 +125,18 @@ public:
                 perror("Error when post from Pipe");
                 return -1;
             }
+            if (dup2(original_stdin, STDIN_FILENO) == -1) {
+                perror("Error restoring stdin");
+                return -1;
+            }
+
+            if (dup2(original_stdout, STDOUT_FILENO) == -1) {
+                perror("Error restoring stdout");
+                return -1;
+            }
+
+        close(original_stdin);
+        close(original_stdout);
         #endif
         #if defined(_WIN32)
             if (!ReleaseSemaphore(
@@ -155,6 +167,7 @@ private:
 
     int init_named_semaphore() {
         generate_unique_name();
+        
         #if defined(__linux__) || defined(__FreeBSD__)
             launch_sem = sem_open(launch_sem_name.c_str(), O_CREAT | O_EXCL , 0644, 0);
             if (launch_sem == SEM_FAILED) {
@@ -184,7 +197,7 @@ private:
         std::mt19937 generator(random_device());
         std::uniform_int_distribution<> distribution(0, chars.size() - 1);
         std::ostringstream oss;
-        #ifdef __linux__
+        #if defined(__linux__) || defined(__FreeBSD__)
             oss << "/" << getpid() << "_";
         #endif
         #if defined(_WIN32)

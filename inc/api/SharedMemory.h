@@ -51,6 +51,7 @@ public:
         #endif
         #if defined(__linux__) || defined(__FreeBSD__)
             const std::string mutex_name = aName + "_mutex";
+            name = aName;
             mem_fd = shm_open(name.c_str(), O_CREAT | O_RDWR, S_IRUSR | S_IWUSR);
             if (mem_fd < 0) {
                 std::cerr << "Cannot get shared memory" << strerror(errno) <<  std::endl;

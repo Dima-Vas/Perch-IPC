@@ -61,7 +61,7 @@ public:
         return arguments;
     }
 
-    #ifdef __linux__
+    #if defined(__linux__) || defined(__FreeBSD__)
         void setPID(int to_set) {
             pid = to_set;
         }
@@ -72,7 +72,7 @@ public:
         }
     #endif
 
-    #ifdef __linux__
+    #if defined(__linux__) || defined(__FreeBSD__)
         int getPID() {
             return pid;
         }
@@ -86,7 +86,7 @@ public:
 private:
     std::string executablePath;
     std::vector<std::string> arguments;
-    #ifdef __linux__ 
+    #if defined(__linux__) || defined(__FreeBSD__) 
         int pid;
     #endif
     #if defined(_WIN32)
