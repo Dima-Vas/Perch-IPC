@@ -44,3 +44,9 @@ Everything you can utilize in this library revolves around classes declared in P
 Find some examples of real-life usage of them all in the documentation
 
 ## Documentation
+Please use Doxyfile to generate html-files containing documentation : 
+
+<code>doxygen Doxyfile</code>
+
+## Contribution
+Contribution is not considered before the release version. You are still free to use any piece of this software with no licensing concerns, though.
