@@ -28,7 +28,7 @@
  * @class SharedMutex
  * @brief An IPC Mutex implementation for synchronization of processes in thread-like manner.
  *
- * Although being possible to be utilized by one as it is, SharedMutex is originally intended to be used as simple synchro mechanism in more complex structures.
+ * Although being possible to be utilized as it is, SharedMutex is originally intended to be used as simple synchro mechanism in more complex structures.
  * @warning This class does not support default constructors.
  */
 class SharedMutex {
@@ -91,7 +91,7 @@ public:
     SharedMutex& operator=(SharedMutex&) = delete;
 
     /**
-     * @brief Locks mutex.
+     * @brief Anonimously locks mutex, indefinitely preventing other from accessing critical section.
      */
     void lock() {
         #if defined(__linux__) || defined(__FreeBSD__)
@@ -107,7 +107,7 @@ public:
     }
 
     /**
-     * @brief Unlocks mutex.
+     * @brief Unlocks mutex, allowing others to lock it.
      */
     void unlock() {
         #if defined(__linux__) || defined(__FreeBSD__)

@@ -9,20 +9,19 @@
 #include <string>
 #include <iostream>
 #include <sstream>
-#include <fcntl.h>
 #include <ctime>
 #include <iomanip>
 #include <random>
 #include <cstring>
 
-
 #include "Process.h"
-
 
 #if defined(__linux__) || defined(__FreeBSD__)
     #include <semaphore.h>
     #include <unistd.h>
     #include "../linux/linux_proc_creation.h"
+    #include <fcntl.h>
+    #include <sys/mman.h>
 #endif
 #if defined(_WIN32)
     #include <io.h>
@@ -37,7 +36,7 @@
  *
  * Provides the interface for the organization of IPC using named pipes.
  * Represents a created Pipe and stores information about it.
- * @warning This class is not intended to be used directly. Check ProcessCreation API for 
+ * @warning This class is not intended to be initialized directly. Check ProcessCreation API for 
  * organizing IPC via pipes.
  */
 class Pipe {
@@ -58,6 +57,16 @@ public:
         init_named_semaphore();
         input_fd = pipe_fd[0];
         output_fd = pipe_fd[1];
+    }
+
+    ~Pipe() {
+        #if defined(__linux__) || defined(__FreeBSD__)
+            sem_unlink(launch_sem_name.c_str());
+            sem_destroy(launch_sem);
+        #endif
+        #if defined(_WIN32)
+            ReleaseSemaphore(launch_sem, 1, NULL);
+        #endif
     }
 
     int get_input_fd() {
@@ -108,25 +117,23 @@ public:
      */
     int transfer() {
         #if defined(__linux__) || defined(__FreeBSD__)
-                // POSIX Semaphore implementation
-                        if (sem_post(launch_sem) != 0) {
-                            perror("Error when post from Pipe");
-                            return -1;
-                        }
-                        if (sem_post(launch_sem) != 0 != 0) {
-                            perror("Error when post from Pipe");
-                            return -1;
-                        }
+            if (sem_post(launch_sem) != 0) {
+                perror("Error when post from Pipe");
+                return -1;
+            }
+            if (sem_post(launch_sem) != 0 ) {
+                perror("Error when post from Pipe");
+                return -1;
+            }
         #endif
         #if defined(_WIN32)
-                // Windows Semaphore implementation
-                if (!ReleaseSemaphore(
-                        launch_sem, // Semaphore handle
-                        1,          // Release count
-                        NULL)) {    // Not used, reserved for future use, should be NULL
-                    std::cerr << "Error when releasing semaphore: " << GetLastError() << std::endl;
-                    return -1;
-                }
+            if (!ReleaseSemaphore(
+                    launch_sem,
+                    1,
+                    NULL)) {
+                std::cerr << "Error when releasing semaphore: " << GetLastError() << std::endl;
+                return -1;
+            }
         #endif
         return 0;
     }
@@ -157,10 +164,10 @@ private:
         #endif
         #if defined(_WIN32)
             launch_sem = CreateSemaphore(
-                    NULL,                  // Default security attributes
-                    0,                     // Initial count
-                    1,                     // Maximum count
-                    launch_sem_name.c_str() // Semaphore name
+                    NULL,
+                    0,
+                    1,
+                    launch_sem_name.c_str()
             );
             if (launch_sem == NULL) {
                 std::cerr << "Error creating semaphore: " << GetLastError() << std::endl;

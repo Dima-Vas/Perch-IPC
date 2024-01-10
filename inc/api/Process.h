@@ -9,6 +9,10 @@
 #include <string>
 #include <vector>
 
+#if  defined(_WIN32)
+    #include <windows.h>
+#endif
+
 /**
  * @class Process
  * @brief A container class representing an entity of the process.
@@ -57,18 +61,37 @@ public:
         return arguments;
     }
 
-    void setPID(int pidToSet) {
-        pid = pidToSet;
-    }
+    #ifdef __linux__
+        void setPID(int to_set) {
+            pid = to_set;
+        }
+    #endif
+    #if defined(_WIN32)
+        void setPID(HANDLE to_set) {
+            pid = to_set;
+        }
+    #endif
 
-    int getPID() {
-        return pid;
-    }
+    #ifdef __linux__
+        int getPID() {
+            return pid;
+        }
+    #endif
+    #if defined(_WIN32)
+        HANDLE getPID() {
+            return pid;
+        }
+    #endif
 
 private:
     std::string executablePath;
     std::vector<std::string> arguments;
-    int pid;
+    #ifdef __linux__ 
+        int pid;
+    #endif
+    #if defined(_WIN32)
+        HANDLE pid;
+    #endif
 };
 
 #endif // PROCESS_H

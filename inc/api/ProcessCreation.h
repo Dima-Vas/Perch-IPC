@@ -13,12 +13,12 @@
 
 /**
  * @class ProcessCreation
- * @brief A functional class providing an API for basic Process entitites manipulations.
+ * @brief A functional crossplatform class providing an API for basic Process entitites manipulations.
  */
 class ProcessCreation {
 public:
     /**
-     * @brief Default - and the only constructor for Process class.
+     * @brief Default and the only constructor for Process class.
      */
     ProcessCreation() = default;
 

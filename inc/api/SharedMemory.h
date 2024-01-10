@@ -94,15 +94,15 @@ public:
 
     ~SharedMemory() {
         #ifdef  __linux__
-                if (shm_unlink(name.c_str()) < 0) {
-                    std::cerr << "Could not unlink the memory in SharedMemory" << std::endl;
-                };
-                if (munmap(data, size * sizeof(T)) < 0) {
-                    std::cerr << "Could not unmap the data in SharedMemory" << std::endl;
-                };
-                if (close(mem_fd) < 0) {
-                    std::cerr << "Could not close the memory descriptor in SharedMemory" << std::endl;
-                }
+            if (shm_unlink(name.c_str()) < 0) {
+                std::cerr << "Could not unlink the memory in SharedMemory" << std::endl;
+            };
+            if (munmap(data, size * sizeof(T)) < 0) {
+                std::cerr << "Could not unmap the data in SharedMemory" << std::endl;
+            };
+            if (close(mem_fd) < 0) {
+                std::cerr << "Could not close the memory descriptor in SharedMemory" << std::endl;
+            }
         #endif
         #if defined(_WIN32)
             UnmapViewOfFile(data);
@@ -194,7 +194,9 @@ public:
      * a "frozen" memory, runtime error is raised.
      */
     void freeze() {
+        sh_mutex.lock();
         frozen = true;
+        sh_mutex.unlock();
     }
 
     bool is_frozen() {
